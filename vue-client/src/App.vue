@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <RepoOverview />
+    <GithubOverview />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import RepoOverview from "./components/RepoOverview.vue";
+import GithubOverview from "./components/github-overview/GithubOverview.vue";
 
 export default Vue.extend({
   name: "app",
   components: {
-    RepoOverview
+    GithubOverview
   }
 });
 </script>

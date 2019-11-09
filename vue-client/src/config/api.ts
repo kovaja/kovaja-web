@@ -1,13 +1,18 @@
-export default function() {
-    return {
-      github:  function() {
-        let url = 'https://api.github.com';
+import { Constants } from "./constants";
 
-        return {
-          users: function(user: string): string {
-            return `${url}/users/${user}`;
-          }
+export default function() {
+  return {
+    github: function() {
+      let url = "https://api.github.com";
+
+      return {
+        user: function(): string {
+          return `${url}/users/${Constants.userName}`;
+        },
+        repos: function(): string {
+          return `${url}/users/${Constants.userName}/repos`;
         }
-      }
-    };
+      };
+    }
+  };
 }
