@@ -2,8 +2,12 @@
   <div class="card bg-color-grey">
     <div class="card-body">
       <h5 class="card-title">{{ repository.name }}</h5>
-      <h6 v-if="hasDescription" class="card-subtitle mb-2 text-muted">{{ repository.description }}</h6>
-      <h6 v-if="hasDescription === false" class="card-subtitle mb-2 text-muted">Without description</h6>
+      <h6 v-if="hasDescription" class="card-subtitle mb-2 text-muted">
+        {{ repository.description }}
+      </h6>
+      <h6 v-if="hasDescription === false" class="card-subtitle mb-2 text-muted">
+        Without description
+      </h6>
       <ul class="list-group list-group-flush bg-color-grey">
         <li class="list-group-item bg-color-grey">
           Created
