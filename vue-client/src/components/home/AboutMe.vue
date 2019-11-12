@@ -1,6 +1,6 @@
 <template>
-  <div class="container-fluid">
-    <h1>Hi, I'm Kuba</h1>
+  <div class="p-4 shadow">
+    <h1 class="mb-4">Hi, I'm Kuba</h1>
     <p class="lead">
       A Frontend developer, based in Prague. Suspendisse nisl. Nunc auctor. Cras
       pede libero, dapibus nec, pretium sit amet, tempor quis. Duis ante orci,
