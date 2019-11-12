@@ -3,11 +3,29 @@
     <transition name="fade">
       <div class="row align-items-center" v-if="hasUser">
         <div class="col-sm-4 text-align-center">
-          <img class="repo-avatar" :src="user.avatar_url" alt="repo-avatar" />
+          <img
+            class="github-icon"
+            src="@/assets/github.png"
+            alt="github-icon"
+          />
         </div>
         <div class="col-sm-8">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{ user.login }}</li>
+            <li class="list-group-item">
+              <!-- <img
+                class="repo-avatar mr-1"
+                :src="user.avatar_url"
+                alt="repo-avatar"
+              /> -->
+              <a :href="user.html_url" target="_blank">
+                <img
+                  class="repo-avatar mr-1"
+                  :src="user.avatar_url"
+                  alt="repo-avatar"
+                />
+                {{ user.login }}
+              </a>
+            </li>
             <li class="list-group-item">
               On github for
               <TimeSince :since="user.created_at" />
@@ -18,12 +36,12 @@
           </ul>
         </div>
       </div>
-      </transition>
-      <div class="row">
-        <div class="col-sm-12">
-          <RepoCarusel />
-        </div>
+    </transition>
+    <div class="row">
+      <div class="col-sm-12">
+        <RepoCarusel />
       </div>
+    </div>
   </div>
 </template>
 
@@ -75,9 +93,16 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.repo-avatar {
+img {
   border: 1px solid transparent;
   border-radius: 50%;
-  height: 100px;
+
+  &.github-icon {
+    height: 100px;
+  }
+
+  &.repo-avatar {
+    height: 25px;
+  }
 }
 </style>
