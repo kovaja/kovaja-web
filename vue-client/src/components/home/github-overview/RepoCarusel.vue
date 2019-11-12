@@ -1,20 +1,22 @@
 <template>
-  <div class="carousel slide" v-if="hasRepositories">
-    <ol class="carousel-indicators">
-      <li
-        v-for="(repo, index) of repositories"
-        :key="'nav-' + repo.id"
-        :class="{ active: activeIndex === index }"
-        :title="repo.name"
-        @click="activateRepo(index)"
-      ></li>
-    </ol>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <RepoCaruselItem :repository="activeRepository" />
+  <transition name="fade">
+    <div class="carousel slide" v-if="hasRepositories">
+      <ol class="carousel-indicators">
+        <li
+          v-for="(repo, index) of repositories"
+          :key="'nav-' + repo.id"
+          :class="{ active: activeIndex === index }"
+          :title="repo.name"
+          @click="activateRepo(index)"
+        ></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <RepoCaruselItem :repository="activeRepository" />
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="ts">
