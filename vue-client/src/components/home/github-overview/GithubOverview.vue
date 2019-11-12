@@ -27,11 +27,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import TimeSince from "../common/TimeSince.vue";
-import RepoCarusel from "./RepoCarusel.vue";
-import { IUserData, IRepository } from "../../interfaces/user-data.interface";
-import Api from "../../config/api";
 import axios from "axios";
+import TimeSince from "@/components/common/TimeSince.vue";
+import RepoCarusel from "@/components/home/github-overview/RepoCarusel.vue";
+import { IUserData, IRepository } from "@/interfaces/user-data.interface";
+import Api from "@/config/api";
 
 export default Vue.extend({
   name: "GithubOverview",

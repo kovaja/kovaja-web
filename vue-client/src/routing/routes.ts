@@ -1,5 +1,5 @@
 import { RouteConfig } from "vue-router";
-import Home from "../components/Home.vue";
+import Home from "../components/home/Home.vue";
 import Projects from "../components/Projects.vue";
 
 const routes: RouteConfig[] = [

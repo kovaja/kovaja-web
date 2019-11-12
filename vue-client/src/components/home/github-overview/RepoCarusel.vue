@@ -3,8 +3,8 @@
     <ol class="carousel-indicators">
       <li
         v-for="(repo, index) of repositories"
-        :key="'nav-'+repo.id"
-        :class="{'active': activeIndex === index}"
+        :key="'nav-' + repo.id"
+        :class="{ active: activeIndex === index }"
         :title="repo.name"
         @click="activateRepo(index)"
       ></li>
@@ -25,10 +25,10 @@ interface ICaruselData {
 }
 
 import Vue from "vue";
-import RepoCaruselItem from "./RepoCaruselItem.vue";
-import { IUserData, IRepository } from "../../interfaces/user-data.interface";
-import Api from "../../config/api";
 import axios from "axios";
+import Api from "@/config/api";
+import RepoCaruselItem from "./RepoCaruselItem.vue";
+import { IUserData, IRepository } from "@/interfaces/user-data.interface";
 
 export default Vue.extend({
   name: "RepoCarusel",
