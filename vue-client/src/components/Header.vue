@@ -12,10 +12,10 @@
     </a>
     <ul class="nav justify-content-end">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Home</a>
+        <router-link class="nav-link" to="/home">Home</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Projects</a>
+        <router-link class="nav-link" to="/projects">Projects</router-link>
       </li>
     </ul>
   </nav>
@@ -28,6 +28,3 @@ export default Vue.extend({
   name: "Header"
 });
 </script>
-
-<style scoped lang="scss">
-</style>
