@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="container-fluid p-0">
     <Header />
-    <div class="container-fluid">
+    <main class="container-fluid">
       <router-view></router-view>
-    </div>
+    </main>
   </div>
 </template>
 
