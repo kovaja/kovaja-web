@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand flex align-items-center" href="/">
-      <img src="../assets/logo.png" class="mr-4" alt="" />
+      <img src="@/assets/logo.png" class="mr-4" alt="" />
       Kovaja
     </a>
     <ul class="nav justify-content-end">

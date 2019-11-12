@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <h1>Hi, I'm Kuba</h1>
-    <p>
+    <p class="lead">
       A Frontend developer, based in Prague. Suspendisse nisl. Nunc auctor. Cras
       pede libero, dapibus nec, pretium sit amet, tempor quis. Duis ante orci,
       molestie vitae vehicula venenatis, tincidunt ac pede. Proin mattis lacinia
