@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-color-grey">
+  <div class="card bg-dark text-white">
     <div class="card-body">
       <h5 class="card-title">{{ repository.name }}</h5>
       <h6 v-if="hasDescription" class="card-subtitle mb-2 text-muted">
@@ -8,17 +8,17 @@
       <h6 v-if="hasDescription === false" class="card-subtitle mb-2 text-muted">
         Without description
       </h6>
-      <ul class="list-group list-group-flush bg-color-grey">
-        <li class="list-group-item bg-color-grey">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-dark text-white">
           Created
           <TimeSince :since="repository.created_at" />ago
         </li>
-        <li class="list-group-item bg-color-grey">
+        <li class="list-group-item bg-dark text-white">
           Last push
           <TimeSince :since="repository.pushed_at" />ago
         </li>
       </ul>
-      <a :href="repository.html_url" target="_blank" class="card-link">Visit</a>
+      <a :href="repository.html_url" target="_blank" class="card-link text-white">Visit</a>
     </div>
   </div>
 </template>
