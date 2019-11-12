@@ -1,9 +1,13 @@
 <template>
-  <div id="app" class="container-fluid p-0">
-    <Header />
-    <main class="container-fluid">
-      <router-view></router-view>
-    </main>
+  <div id="app" class="vh-100">
+    <div class="container-fluid d-flex flex-column h-100 p-0">
+      <Header />
+      <main class="container-fluid flex-grow-1 d-flex align-items-center">
+        <div class="flex-grow-1">
+          <router-view></router-view>
+        </div>
+      </main>
+    </div>
   </div>
 </template>
 
