@@ -11,8 +11,13 @@
         ></li>
       </ol>
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <RepoCaruselItem :repository="activeRepository" />
+        <div
+          class="carousel-item"
+          v-for="(repo, index) of repositories"
+          :key="'inner-' + repo.id"
+          :class="{ active: activeIndex === index }"
+        >
+          <RepoCaruselItem :repository="repo" />
         </div>
       </div>
     </div>
@@ -47,9 +52,6 @@ export default Vue.extend({
   computed: {
     hasRepositories: function(): boolean {
       return this.repositories.length > 0;
-    },
-    activeRepository: function(): IRepository {
-      return this.repositories[this.activeIndex];
     }
   },
   methods: {
