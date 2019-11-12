@@ -8,7 +8,7 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">{{ user.login }}</li>
           <li class="list-group-item">
-            At github for
+            On github for
             <TimeSince :since="user.created_at" />
           </li>
           <li class="list-group-item">
