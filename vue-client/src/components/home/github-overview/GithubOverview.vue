@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <transition name="fade">
+  <div class="p-4 shadow">
+    <transition name="fade" v-if="false">
       <div class="row align-items-center" v-if="hasUser">
         <div class="col-sm-4 text-align-center">
           <img
@@ -39,7 +39,15 @@
     </transition>
     <div class="row">
       <div class="col-sm-12">
-        <RepoCarusel />
+        <RepoCarusel v-if="false" />
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+          fugiat nulla pariatur. Mauris tincidunt sem sed arcu. Integer
+          vulputate sem a nibh rutrum consequat. Aenean id metus id velit
+          ullamcorper pulvinar. Nulla accumsan, elit sit amet varius semper,
+          nulla mauris mollis quam, tempor suscipit diam nulla vel leo.
+        </p>
       </div>
     </div>
   </div>
@@ -87,7 +95,7 @@ export default Vue.extend({
     }
   },
   mounted: function() {
-    this.downloadUserInfo();
+    // this.downloadUserInfo();
   }
 });
 </script>
