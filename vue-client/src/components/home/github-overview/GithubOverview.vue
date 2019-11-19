@@ -12,11 +12,6 @@
         <div class="col-sm-8">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <!-- <img
-                class="repo-avatar mr-1"
-                :src="user.avatar_url"
-                alt="repo-avatar"
-              /> -->
               <a :href="user.html_url" target="_blank">
                 <img
                   class="repo-avatar mr-1"
@@ -47,11 +42,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import axios from "axios";
 import TimeSince from "@/components/common/TimeSince.vue";
 import RepoCarusel from "@/components/home/github-overview/RepoCarusel.vue";
 import { IUserData, IRepository } from "@/interfaces/user-data.interface";
-import Api from "@/config/api";
+import { Actions, IState } from "@/store/store";
+import { mapState } from "vuex";
 
 export default Vue.extend({
   name: "GithubOverview",
@@ -60,34 +55,18 @@ export default Vue.extend({
     RepoCarusel
   },
   props: {},
-  data: function(): { user: IUserData | null; repositories: IRepository[] } {
-    return {
-      user: null,
-      repositories: []
-    };
-  },
   computed: {
+    ...mapState({ user: "user" }),
     hasUser: function(): boolean {
       return this.user !== null;
-    },
-    hasRepositories: function(): boolean {
-      return this.repositories.length > 0;
     }
   },
-  methods: {
-    setUser: function(data: IUserData) {
-      this.user = data;
-    },
-    downloadUserInfo: function() {
-      const url = Api()
-        .github()
-        .user();
+  created: function() {
+    if (this.user !== null) {
+      return;
+    }
 
-      axios.get(url).then(res => this.setUser(res.data));
-    }
-  },
-  mounted: function() {
-    this.downloadUserInfo();
+    this.$store.dispatch(Actions.GET_USER);
   }
 });
 </script>

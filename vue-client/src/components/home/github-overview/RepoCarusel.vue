@@ -25,34 +25,27 @@
 </template>
 
 <script lang="ts">
-interface ICaruselData {
-  repositories: IRepository[];
-  activeIndex: number;
-  intervalRef: number;
-}
-
 import Vue from "vue";
 import axios from "axios";
 import Api from "@/config/api";
 import RepoCaruselItem from "./RepoCaruselItem.vue";
-import { IUserData, IRepository } from "@/interfaces/user-data.interface";
-import fakeRepos from "@/mock-data/mock-repositories";
-
-const useFakeData: boolean = true;
+import { IRepository } from "@/interfaces/user-data.interface";
+import { mapState } from "vuex";
+import { IState, Actions } from "../../../store/store";
 
 export default Vue.extend({
   name: "RepoCarusel",
   components: {
     RepoCaruselItem
   },
-  data: function(): ICaruselData {
+  data: function() {
     return {
-      repositories: [],
       activeIndex: 0,
       intervalRef: 0
     };
   },
   computed: {
+    ...mapState({ repositories: "repositories" }),
     hasRepositories: function(): boolean {
       return this.repositories.length > 0;
     }
@@ -74,27 +67,22 @@ export default Vue.extend({
       this.repositories = repos;
       this.startCarusel();
     },
-    downloadRepositories: function() {
-      if (useFakeData) {
-        this.setRepositories(fakeRepos);
-        return;
-      }
-
-      const url = Api()
-        .github()
-        .repos();
-
-      axios.get(url).then(res => this.setRepositories(res.data));
-    },
     activateRepo: function(newRepo: number) {
       this.activeIndex = newRepo;
+    },
+    beforeDestroy: function() {
+      window.clearInterval(this.intervalRef);
     }
   },
-  mounted: function() {
-    this.downloadRepositories();
-  },
-  beforeDestroy: function() {
-    window.clearInterval(this.intervalRef);
+  created: function() {
+    if (this.repositories.length > 0) {
+      this.startCarusel();
+      return;
+    }
+
+    this.$store
+      .dispatch(Actions.GET_REPOSITORIES)
+      .then(() => this.startCarusel());
   }
 });
 </script>
