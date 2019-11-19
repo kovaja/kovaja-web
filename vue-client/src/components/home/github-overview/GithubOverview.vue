@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 shadow">
+  <div class="p-4 shadow w-100">
     <transition name="fade">
       <div class="row align-items-center" v-if="hasUser">
         <div class="col-sm-4 text-align-center">
