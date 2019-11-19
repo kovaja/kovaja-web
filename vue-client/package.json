@@ -41,6 +41,9 @@
     "rules": {
       "no-console": [
         "warn"
+      ],
+      "no-debugger": [
+        "warn"
       ]
     },
     "parserOptions": {
