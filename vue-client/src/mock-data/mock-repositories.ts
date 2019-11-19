@@ -11,7 +11,7 @@ const fakeRepos: IRepository[] = [
     html_url: "https://mall.cz"
   },
   {
-    id: 123,
+    id: 12345,
     name: "Looong Repository name",
     description: "Looooooooooooooonger Repository description",
     size: 1234,
