@@ -1,0 +1,19 @@
+{
+  "name": "kovaja-ts-node-template",
+  "version": "0.0.1",
+  "description": "Empty project with template for node.js application with REST api and react frontend",
+  "scripts": {
+    "validate": "node ./tools/validation.js",
+    "postinstall": "npm run client:install && npm run server:install",
+    "client:install": "cd client && npm install --only=dev && npm install && npm run build",
+    "server:install": "cd server && npm install --only=dev && npm install && npm run build",
+    "server": "cd server && npm run prod",
+    "start": "npm run server",
+
+    "server:dev": "cd server && npm run dev",
+    "client:dev": "cd client && npm run dev"
+  },
+  "keywords": ["node", "typescript"],
+  "author": "kovaja",
+  "license": "ISC"
+}
