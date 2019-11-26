@@ -9,7 +9,9 @@
         <router-link class="nav-link text-light" to="/home">Home</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link text-light" to="/favorites">What do I like</router-link>
+        <router-link class="nav-link text-light" to="/favorites"
+          >What do I like</router-link
+        >
       </li>
       <li class="nav-item">
         <router-link class="nav-link text-light" to="/projects"

@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Vuex from "vuex";
 import App from "./App.vue";
 import routes from "./routing/routes";
-import { storeOptions } from './store/store';
+import { storeOptions } from "./store/store";
 import "./styles/styles.scss";
 
 Vue.config.productionTip = false;
