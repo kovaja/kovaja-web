@@ -1,3 +1,3 @@
 export const AppConfig = {
-  CLIENT_BUILD_PATH: '../../client/build'
+  CLIENT_BUILD_PATH: '../../client/dist'
 };
