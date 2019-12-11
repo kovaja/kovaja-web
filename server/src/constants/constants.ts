@@ -1,3 +1,3 @@
 export const Constants = {
-  APP_NAME: 'ts-node-template'
+  APP_NAME: 'kovaja-web'
 };
