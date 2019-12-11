@@ -23,10 +23,10 @@ class App {
     const staticPath = path.join(__dirname, AppConfig.CLIENT_BUILD_PATH);
 
     this.app.use(bodyParser.json());
-    this.app.use(express.static(staticPath));
-    this.app.get('/', this.serveIndex.bind(this));
-
     Routes.initRoutes(this.app);
+
+    this.app.use(express.static(staticPath));
+    this.app.get('/*', this.serveIndex.bind(this));
   }
 }
 
