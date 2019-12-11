@@ -1,4 +1,4 @@
-import { IRepository } from "../interfaces/user-data.interface";
+import { IRepository } from "../../../shared/api.schemas";
 
 const fakeRepos: IRepository[] = [
   {

@@ -1,7 +1,7 @@
 import Api from "@/config/api";
 import axios from "axios";
 import { StoreOptions } from "vuex";
-import { IRepository, IUserData } from "../interfaces/user-data.interface";
+import { IRepository, IUserData } from "../../../shared/api.schemas";
 
 export interface IState {
   userDataLoading: boolean;

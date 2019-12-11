@@ -44,7 +44,7 @@
 import Vue from "vue";
 import TimeSince from "@/components/common/TimeSince.vue";
 import RepoCarusel from "@/components/home/github-overview/RepoCarusel.vue";
-import { IUserData, IRepository } from "@/interfaces/user-data.interface";
+import { IUserData, IRepository } from "../../../../../shared/api.schemas";
 import { Actions, IState } from "@/store/store";
 import { mapState } from "vuex";
 
