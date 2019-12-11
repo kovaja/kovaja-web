@@ -1,4 +1,4 @@
-import { ITestResponse } from '../../../shared/api.schemas';
+import { IUserData } from '../../../shared/api.schemas';
 import { HttpUtility } from '../utilities/http.utility';
 
 
@@ -10,16 +10,26 @@ export class GithubController {
     this.githubUser = 'kovaja';
   }
 
-  public getUserData(): Promise<ITestResponse> {
+  public getUserData(): Promise<IUserData> {
     const url = 'https://api.github.com/users/' + this.githubUser;
 
-    // TODO: reduce data to what is needed
-    return HttpUtility.getJSON(url, { 'User-Agent': this.githubUser });
+
+    const buildResponse = (data: any): IUserData => {
+      return {
+        avatar_url: data.avatar_url,
+        login: data.login,
+        created_at: data.created_at,
+        public_repos: data.public_repos
+      };
+    };
+
+    return HttpUtility.getJSON(url, { 'User-Agent': this.githubUser })
+      .then(buildResponse);
   }
 
-  public getReposData(): Promise<ITestResponse> {
+  public getReposData(): Promise<any> {
 
-    const testData: ITestResponse = {
+    const testData: any = {
       message: 'This is your response from test API: ' + new Date().toLocaleString()
     };
 
