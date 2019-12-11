@@ -1,19 +1,18 @@
-import { IUserData } from '../../../shared/api.schemas';
+import { IUserData, IRepository } from '../../../shared/api.schemas';
 import { HttpUtility } from '../utilities/http.utility';
 
 
 export class GithubController {
 
   private githubUser: string;
+  private baseUrl: string;
 
   constructor() {
     this.githubUser = 'kovaja';
+    this.baseUrl = 'https://api.github.com/users/' + this.githubUser;
   }
 
   public getUserData(): Promise<IUserData> {
-    const url = 'https://api.github.com/users/' + this.githubUser;
-
-
     const buildResponse = (data: any): IUserData => {
       return {
         avatar_url: data.avatar_url,
@@ -23,16 +22,31 @@ export class GithubController {
       };
     };
 
-    return HttpUtility.getJSON(url, { 'User-Agent': this.githubUser })
+    return HttpUtility
+      .getJSON(this.baseUrl, { 'User-Agent': this.githubUser })
       .then(buildResponse);
   }
 
-  public getReposData(): Promise<any> {
+  public getReposData(): Promise<IRepository[]> {
+    const url = this.baseUrl + '/repos';
 
-    const testData: any = {
-      message: 'This is your response from test API: ' + new Date().toLocaleString()
+
+    const buildResponse = (dataArr: any[]): IRepository[] => {
+      return dataArr.map(data => {
+        return {
+          id: data.id,
+          name: data.name,
+          description: data.description,
+          size: data.size,
+          created_at: data.created_at,
+          pushed_at: data.pushed_at,
+          html_url: data.html_url,
+        };
+      })
     };
 
-    return Promise.resolve(testData);
+    return HttpUtility
+      .getJSON(url, { 'User-Agent': this.githubUser })
+      .then(buildResponse);
   }
 }

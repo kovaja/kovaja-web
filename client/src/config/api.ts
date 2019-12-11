@@ -1,5 +1,3 @@
-import { Constants } from "./constants";
-
 export default function() {
   return {
     github: function() {
@@ -10,7 +8,7 @@ export default function() {
           return `${url}/user`;
         },
         repos: function(): string {
-          return `https://api.github.com/users/${Constants.userName}/repos`;
+          return `${url}/repos`;
         }
       };
     }
