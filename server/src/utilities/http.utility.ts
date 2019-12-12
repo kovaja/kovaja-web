@@ -1,4 +1,6 @@
 import * as request from 'request';
+import { Logger } from './logger';
+import { AppError } from '../models/AppError';
 
 export class HttpUtility {
   private static isFailResponse(res: request.Response): boolean {
@@ -20,29 +22,35 @@ export class HttpUtility {
     return message + details;
   }
 
+  public static readJsonBody(data: string): any {
+    let json;
 
-  public static getJSON(url: string, headers?: request.Headers): Promise<any> {
+    try {
+      json = JSON.parse(data);
+    } catch (error) {
+      Logger.error(error);
+    }
+
+    if (typeof json !== 'object') {
+      throw new AppError('Could not parse body');
+    }
+
+    return json;
+  }
+
+  public static readBodyFromResponse(response: request.Response): string {
+    return response.body;
+  }
+
+  public static get(url: string, headers?: request.Headers): Promise<request.Response> {
     const promiseExecutor = (resolve, reject): void => {
 
-      const requestCallback = (error: any, res: request.Response, body: any): void => {
+      const requestCallback = (error: any, res: request.Response): void => {
         if (error) {
           return reject(error);
         }
 
-        if (HttpUtility.isFailResponse(res)) {
-          const errorToThrow = new Error(HttpUtility.getErrorMessage(url, res));
-          return reject(errorToThrow);
-        }
-
-        let data = undefined;
-
-        try {
-          data = JSON.parse(body);
-        } catch (error) {
-          return reject(error);
-        }
-
-        resolve(data);
+        resolve(res);
       };
 
       const options = {
