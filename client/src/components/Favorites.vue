@@ -1,7 +1,7 @@
 <template>
   <div class="row align-items-center">
     <div class="col-md-12 col-lg-4">
-      <div class="p-4 shadow">
+      <ContentCard>
         <h1>Articles</h1>
         <p>
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -9,10 +9,10 @@
           vulputate eget mollis sed, tempor sed magna. Phasellus rhoncus.
           Aliquam id dolor.
         </p>
-      </div>
+      </ContentCard>
     </div>
     <div class="col-md-12 col-lg-4">
-      <div class="p-4 shadow">
+      <ContentCard>
         <h1>Podcasts</h1>
         <p>
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -20,10 +20,10 @@
           vulputate eget mollis sed, tempor sed magna. Phasellus rhoncus.
           Aliquam id dolor.
         </p>
-      </div>
+      </ContentCard>
     </div>
     <div class="col-md-12 col-lg-4">
-      <div class="p-4 shadow">
+      <ContentCard>
         <h1>Sports</h1>
         <p>
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -31,15 +31,19 @@
           vulputate eget mollis sed, tempor sed magna. Phasellus rhoncus.
           Aliquam id dolor.
         </p>
-      </div>
+      </ContentCard>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import ContentCard from "@/components/common/ContentCard.vue";
 
 export default Vue.extend({
-  name: "Favorites"
+  name: "Favorites",
+  components: {
+    ContentCard
+  }
 });
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 shadow w-100">
+  <ContentCard class="w-100">
     <transition name="fade">
       <div class="row align-items-center" v-if="hasUser">
         <div class="col-sm-4 text-align-center">
@@ -37,13 +37,14 @@
         <RepoCarusel />
       </div>
     </div>
-  </div>
+  </ContentCard>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import TimeSince from "@/components/common/TimeSince.vue";
 import RepoCarusel from "@/components/home/github-overview/RepoCarusel.vue";
+import ContentCard from "@/components/common/ContentCard.vue";
 import { IUserData, IRepository } from "../../../../../shared/api.schemas";
 import { Actions, IState } from "@/store/store";
 import { mapState } from "vuex";
@@ -52,7 +53,8 @@ export default Vue.extend({
   name: "GithubOverview",
   components: {
     TimeSince,
-    RepoCarusel
+    RepoCarusel,
+    ContentCard
   },
   props: {},
   computed: {

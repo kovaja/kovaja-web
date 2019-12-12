@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 shadow">
+  <ContentCard>
     <h1 class="mb-4">Hi, I'm Kuba</h1>
     <p class="lead">
       A Frontend developer, based in Prague. Suspendisse nisl. Nunc auctor. Cras
@@ -12,13 +12,17 @@
       Aenean placerat. Mauris dolor felis, sagittis at, luctus sed, aliquam non,
       tellus.
     </p>
-  </div>
+  </ContentCard>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import ContentCard from "@/components/common/ContentCard.vue";
 
 export default Vue.extend({
-  name: "AboutMe"
+  name: "AboutMe",
+  components: {
+    ContentCard
+  }
 });
 </script>
