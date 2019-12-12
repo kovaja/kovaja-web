@@ -29,7 +29,7 @@ import Vue from "vue";
 import axios from "axios";
 import Api from "@/config/api";
 import RepoCaruselItem from "./RepoCaruselItem.vue";
-import { IRepository } from "@/interfaces/user-data.interface";
+import { IRepository } from "../../../../../shared/api.schemas";
 import { mapState } from "vuex";
 import { IState, Actions } from "../../../store/store";
 

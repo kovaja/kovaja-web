@@ -1,3 +1,7 @@
+export interface IErrorResponse {
+  error: string;
+}
+
 export interface IUserData {
   avatar_url: string;
   login: string;
@@ -5,7 +9,6 @@ export interface IUserData {
   public_repos: number;
 }
 
-// TODO: extract to file
 export interface IRepository {
   id: number;
   name: string;

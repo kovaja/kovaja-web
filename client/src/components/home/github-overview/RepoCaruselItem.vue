@@ -34,7 +34,7 @@
 import Vue, { PropType } from "vue";
 import axios from "axios";
 import TimeSince from "@/components/common/TimeSince.vue";
-import { IRepository } from "@/interfaces/user-data.interface";
+import { IRepository } from "../../../../../shared/api.schemas";
 
 export default Vue.extend({
   name: "RepoCaruselItem",
