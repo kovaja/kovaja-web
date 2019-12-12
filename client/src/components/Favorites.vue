@@ -1,6 +1,6 @@
 <template>
   <div class="row align-items-center">
-    <div class="col-sm-12 col-md-4">
+    <div class="col-md-12 col-lg-4">
       <div class="p-4 shadow">
         <h1>Articles</h1>
         <p>
@@ -11,7 +11,7 @@
         </p>
       </div>
     </div>
-    <div class="col-sm-12 col-md-4">
+    <div class="col-md-12 col-lg-4">
       <div class="p-4 shadow">
         <h1>Podcasts</h1>
         <p>
@@ -22,7 +22,7 @@
         </p>
       </div>
     </div>
-    <div class="col-sm-12 col-md-4">
+    <div class="col-md-12 col-lg-4">
       <div class="p-4 shadow">
         <h1>Sports</h1>
         <p>
