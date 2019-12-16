@@ -53,12 +53,42 @@ export class HttpUtility {
         resolve(res);
       };
 
-      const options = {
+      const options: request.OptionsWithUrl = {
         url: url,
         headers: headers || {}
       };
 
       request(options, requestCallback);
+    };
+
+    return new Promise(promiseExecutor);
+  }
+
+  public static post(url: string, body: any,  headers?: request.Headers): Promise<request.Response> {
+    const promiseExecutor = (resolve, reject): void => {
+
+      const requestCallback = (error: any, res: request.Response): void => {
+        if (error) {
+          return reject(error);
+        }
+
+        if (HttpUtility.isFailResponse(res)) {
+          return reject(HttpUtility.readBodyFromResponse(res));
+        }
+
+        resolve(res);
+      };
+
+      const content = JSON.stringify(body);
+
+      const options: request.OptionsWithUrl = {
+        method: 'POST',
+        headers: headers || {},
+        body: content,
+        url: url
+      };
+
+      request.post(options, requestCallback);
     };
 
     return new Promise(promiseExecutor);
