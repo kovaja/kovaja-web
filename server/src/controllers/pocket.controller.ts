@@ -69,6 +69,31 @@ export class PocketController {
     return `${this.baseUrl}/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`;
   }
 
+  private getShortenedUrl(fullUrl: string): string {
+    if (typeof fullUrl !== 'string') {
+      return '';
+    }
+
+    return fullUrl
+      .replace('https://', '') // https://www.seznam.cz
+      .replace('http://', '')// http://www.seznam.cz
+      .replace('www.', '')
+      .replace(/\/.*/g, '') // seznam.cz/test?param=123
+      .replace(/\?.*/g, ''); // seznam.cz?param=123
+  }
+
+  private getShortenedExcerpt(text: string): string {
+    if (typeof text !== 'string') {
+      return '';
+    }
+
+    return text
+      .split(' ')
+      .slice(0, 20)
+      .join(' ')
+      + '...';
+  }
+
   private authorizeUser(requestToken: string): Promise<string> {
     const url = this.oauthApi + '/authorize';
 
@@ -162,10 +187,11 @@ export class PocketController {
     const buldArticle = (data: any): IArticle => {
       return {
         resolved_title: data.resolved_title,
-        excerpt: data.excerpt,
+        excerpt: this.getShortenedExcerpt(data.excerpt),
         image: data.image ? data.image.src : null,
         time_added: Number(data.time_added),
-        resolved_url: data.resolved_url
+        resolved_url: data.resolved_url,
+        shortened_url: this.getShortenedUrl(data.resolved_url)
       };
     };
 

@@ -25,4 +25,5 @@ export interface IArticle {
   image: string;
   time_added: number;
   resolved_url: string;
+  shortened_url: string;
 }
