@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { GithubController } from '../controllers/github.controller';
-import { ApiUtility } from '../utils/api.utility';
+import { Api } from '../utils/api';
 
 export class GithubRoute {
   private controller: GithubController;
@@ -18,13 +18,13 @@ export class GithubRoute {
 
   private handleUser(req: Request, res: Response): void {
     this.controller.getUserData()
-      .then(ApiUtility.handleResponse(res))
-      .catch(ApiUtility.handleError(res));
+      .then(Api.handleResponse(res))
+      .catch(Api.handleError(res));
   }
 
   private handleRepos(req: Request, res: Response): void {
     this.controller.getReposData()
-      .then(ApiUtility.handleResponse(res))
-      .catch(ApiUtility.handleError(res));
+      .then(Api.handleResponse(res))
+      .catch(Api.handleError(res));
   }
 }

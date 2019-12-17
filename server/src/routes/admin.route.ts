@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { AdminController } from '../controllers/admin.controller';
-import { ApiUtility } from '../utils/api.utility';
+import { Api } from '../utils/api';
 
 export class AdminRoute {
   private controller: AdminController;
@@ -17,7 +17,7 @@ export class AdminRoute {
 
   private handleUser(req: Request, res: Response): void {
     this.controller.createConfiguration()
-      .then(ApiUtility.handleResponse(res))
-      .catch(ApiUtility.handleError(res));
+      .then(Api.handleResponse(res))
+      .catch(Api.handleError(res));
   }
 }

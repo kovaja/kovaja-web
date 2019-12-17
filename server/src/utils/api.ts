@@ -3,7 +3,7 @@ import { IErrorResponse } from '../../../shared/api.schemas';
 import { AppError } from '../models/AppError';
 import { Logger } from './logger';
 
-export class ApiUtility {
+export class Api {
   public static handleError(res: Response): (error: Error | AppError) => void {
     return (error: Error | AppError): void => {
       Logger.error(error);

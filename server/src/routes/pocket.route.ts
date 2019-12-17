@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { PocketController } from '../controllers/pocket.controller';
-import { ApiUtility } from '../utils/api.utility';
+import { Api } from '../utils/api';
 
 export class PocketRoute {
   private controller: PocketController;
@@ -19,18 +19,18 @@ export class PocketRoute {
 
   private handleLogin(req: Request, res: Response): void {
     this.controller.loginToPocket(res)
-      .catch(ApiUtility.handleError(res));
+      .catch(Api.handleError(res));
   }
 
   private handleRedirect(req: Request, res: Response): void {
     this.controller.handlePocketCallback()
-      .then(ApiUtility.handleResponse(res))
-      .catch(ApiUtility.handleError(res));
+      .then(Api.handleResponse(res))
+      .catch(Api.handleError(res));
   }
 
   private handleArticles(req: Request, res: Response): void {
     this.controller.getArticles()
-      .then(ApiUtility.handleResponse(res))
-      .catch(ApiUtility.handleError(res));
+      .then(Api.handleResponse(res))
+      .catch(Api.handleError(res));
   }
 }
