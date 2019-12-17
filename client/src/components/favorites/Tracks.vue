@@ -1,29 +1,29 @@
 <template>
   <ul class="list-group list-group-flush list-group-articles">
     <li
-      v-for="(article, index) of articles"
+      v-for="(track, index) of tracks"
       :key="'article' + index"
       class="list-group-item"
     >
       <div class="card border-0" style="max-width: 540px;">
         <div class="row no-gutters">
           <div class="col-md-2 d-flex align-items-center">
-            <img :src="article.image" class="card-img" alt="Article image" />
+            <img :src="track.image" class="card-img" alt="Article image" />
           </div>
           <div class="col-md-10">
             <div class="card-body">
               <h5 class="card-title">
-                <a :href="article.resolved_url" target="_blank">
-                  {{ article.resolved_title }}
+                <a :href="track.url" target="_blank">
+                  {{ track.name }}
                 </a>
               </h5>
               <p class="card-text">
                 <small>
-                  {{ article.excerpt }}
+                  {{ track.album }}
                 </small>
               </p>
               <p class="card-text">
-                <small class="text-muted">{{ article.shortened_url }}</small>
+                <small class="text-muted">{{ track.artists.join(", ") }}</small>
               </p>
             </div>
           </div>
@@ -39,16 +39,16 @@ import { Actions } from "@/store/store";
 import { mapState } from "vuex";
 
 export default Vue.extend({
-  name: "Articles",
+  name: "Tracks",
   computed: {
-    ...mapState({ articles: "articles" })
+    ...mapState({ tracks: "tracks" })
   },
   created: function() {
-    if (this.articles.length > 0) {
+    if (this.tracks.length > 0) {
       return;
     }
 
-    this.$store.dispatch(Actions.GET_ARTICLES);
+    this.$store.dispatch(Actions.GET_TRACKS);
   }
 });
 </script>

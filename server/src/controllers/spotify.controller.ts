@@ -115,7 +115,7 @@ export class SpotifyController {
     }
 
     if (state !== this.authorizeHash) {
-      Logger.error('Spotify authorization hash does not match!', state);
+      Logger.error('Spotify authorization hash does not match', state);
       return Promise.reject('Spotify authorization failed');
     }
 
@@ -161,6 +161,7 @@ export class SpotifyController {
       };
     };
 
+    // TODO: handle rate limiting
     return logToSpotify
       .then(() => Http.get(url, headers))
       .then(Http.readBodyFromResponse)

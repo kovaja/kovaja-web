@@ -21,6 +21,15 @@ export default function() {
           return `${url}/articles`;
         }
       };
+    },
+    spotify: function() {
+      const url = `${baseUrl}/spotify`;
+
+      return {
+        played: function(): string {
+          return `${url}/played`;
+        }
+      };
     }
   };
 }

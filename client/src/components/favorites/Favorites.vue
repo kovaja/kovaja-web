@@ -13,11 +13,9 @@
       <ContentCard>
         <h1>Podcasts</h1>
         <p>
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat. Nullam lectus justo,
-          vulputate eget mollis sed, tempor sed magna. Phasellus rhoncus.
-          Aliquam id dolor.
+          Music I am currently listening
         </p>
+        <Tracks />
       </ContentCard>
     </div>
   </div>
@@ -27,12 +25,14 @@
 import Vue from "vue";
 import ContentCard from "@/components/common/ContentCard.vue";
 import Articles from "@/components/favorites/Articles.vue";
+import Tracks from "@/components/favorites/Tracks.vue";
 
 export default Vue.extend({
   name: "Favorites",
   components: {
     ContentCard,
-    Articles
+    Articles,
+    Tracks
   }
 });
 </script>

@@ -1,7 +1,12 @@
 import Api from "@/config/api";
 import axios from "axios";
 import { StoreOptions } from "vuex";
-import { IRepository, IUserData, IArticle } from "../../../shared/api.schemas";
+import {
+  IRepository,
+  IUserData,
+  IArticle,
+  ISpotifyTrack
+} from "../../../shared/api.schemas";
 
 export interface IState {
   userDataLoading: boolean;
@@ -10,12 +15,14 @@ export interface IState {
   user: IUserData | null;
   repositories: IRepository[];
   articles: IArticle[];
+  tracks: ISpotifyTrack[];
 }
 
 export enum Actions {
   GET_USER = "GET_USER",
   GET_REPOSITORIES = "GET_REPOSITORIES",
-  GET_ARTICLES = "GET_ARTICLES"
+  GET_ARTICLES = "GET_ARTICLES",
+  GET_TRACKS = "GET_TRACKS"
 }
 
 interface ILoadingData {
@@ -40,7 +47,8 @@ export const storeOptions: StoreOptions<IState> = {
     articlesLoading: false,
     user: null,
     repositories: [],
-    articles: []
+    articles: [],
+    tracks: []
   },
   getters: {},
   mutations: {
@@ -62,6 +70,9 @@ export const storeOptions: StoreOptions<IState> = {
     },
     setArticles: (state: IState, articles: IArticle[]) => {
       state.articles = articles;
+    },
+    setTracks: (state: IState, tracks: ISpotifyTrack[]) => {
+      state.tracks = tracks;
     }
   },
   actions: {
@@ -99,6 +110,18 @@ export const storeOptions: StoreOptions<IState> = {
       axios.get(url).then(res => {
         commit("setLoading", loadingFactory("articles", false));
         commit("setArticles", res.data);
+      });
+    },
+    [Actions.GET_TRACKS]: ({ commit }) => {
+      commit("setLoading", loadingFactory("tracks", true));
+
+      const url = Api()
+        .spotify()
+        .played();
+
+      axios.get(url).then(res => {
+        commit("setLoading", loadingFactory("tracks", false));
+        commit("setTracks", res.data);
       });
     }
   }
