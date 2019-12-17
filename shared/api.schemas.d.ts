@@ -27,3 +27,12 @@ export interface IArticle {
   resolved_url: string;
   shortened_url: string;
 }
+
+export interface ISpotifyTrack {
+  name: string;
+  album: string;
+  image: string;
+  artists: string[];
+  played_at: string;
+  url: string;
+}

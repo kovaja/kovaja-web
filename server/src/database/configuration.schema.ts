@@ -3,13 +3,17 @@ import { Document, model, Model, Schema } from 'mongoose';
 export interface IConfiguration {
   pocketConsumerKey: string;
   pocketAccessKey: string;
+  spotifyClientId: string;
+  spotifyClientSecret: string;
 }
 
 interface IConfigurationModel extends IConfiguration, Document { }
 
 const ConfigurationSchema: Schema = new Schema({
   pocketConsumerKey: String,
-  pocketAccessKey: String
+  pocketAccessKey: String,
+  spotifyClientId: String,
+  spotifyClientSecret: String
 });
 
 const ConfigurationDB: Model<IConfigurationModel> = model<IConfigurationModel>('Configuration', ConfigurationSchema);

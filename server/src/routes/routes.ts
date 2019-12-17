@@ -5,6 +5,7 @@ import { AppConfig } from '../app.config';
 import { GithubRoute } from './github.route';
 import { PocketRoute } from './pocket.route';
 import { AdminRoute } from './admin.route';
+import { SpotifyRoute } from './spotify.route';
 
 const staticPath = path.resolve(__dirname, '../', AppConfig.CLIENT_BUILD_PATH);
 
@@ -22,6 +23,7 @@ export function initRoutes(app: express.Application): void {
   new GithubRoute(router);
   new PocketRoute(router);
   new AdminRoute(router);
+  new SpotifyRoute(router);
 
   app.use('/api', router);
 }

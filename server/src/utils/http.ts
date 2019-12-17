@@ -4,7 +4,11 @@ import { AppError } from '../models/AppError';
 
 export class Http {
   public static readonly jsonHeaders: request.Headers = {
-    'Content-Type': 'application/json; charset=UTF-8',
+    'Content-Type': 'application/json; charset=UTF-8'
+  };
+
+  public static readonly formEncodedHeaders: request.Headers = {
+    'Content-Type': 'application/x-www-form-urlencoded'
   };
 
   private static isFailResponse(res: request.Response): boolean {
@@ -60,6 +64,10 @@ export class Http {
     return response.body;
   }
 
+  public static urlEncodeObject(obj: object): string {
+    return Object.keys(obj).map(k => k + '=' + global.encodeURIComponent(obj[k])).join('&');
+  }
+
   public static get(url: string, headers?: request.Headers): Promise<request.Response> {
     const promiseExecutor = (resolve, reject): void => {
       const options: request.OptionsWithUrl = {
@@ -75,7 +83,7 @@ export class Http {
 
   public static post(url: string, body: any, headers?: request.Headers): Promise<request.Response> {
     const promiseExecutor = (resolve, reject): void => {
-      const content = JSON.stringify(body);
+      const content = typeof body !== 'string' ? JSON.stringify(body) : body;
 
       const options: request.OptionsWithUrl = {
         method: 'POST',
