@@ -1,9 +1,9 @@
 import { IUserData, IRepository } from '../../../shared/api.schemas';
-import { HttpUtility } from '../utilities/http.utility';
+import { HttpUtility } from '../utils/http.utility';
 import { Response, Headers } from 'request';
-import { Logger } from '../utilities/logger';
+import { Logger } from '../utils/logger';
 import { AppCache } from '../models/AppCache';
-import { promiseTap } from '../utilities/commons';
+import { promiseTap } from '../utils/commons';
 
 const GITHUB_REMAINING_HITS = 'x-ratelimit-remaining';
 const GITHUB_HITS_RESET = 'x-ratelimit-reset';

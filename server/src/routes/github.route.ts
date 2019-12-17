@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { GithubController } from '../controllers/github.controller';
-import { ApiUtility } from '../utilities/api.utility';
+import { ApiUtility } from '../utils/api.utility';
 
 export class GithubRoute {
   private controller: GithubController;

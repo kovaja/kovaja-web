@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { PocketController } from '../controllers/pocket.controller';
-import { ApiUtility } from '../utilities/api.utility';
+import { ApiUtility } from '../utils/api.utility';
 
 export class PocketRoute {
   private controller: PocketController;

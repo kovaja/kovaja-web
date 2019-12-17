@@ -1,4 +1,4 @@
-import { Logger } from '../utilities/logger';
+import { Logger } from '../utils/logger';
 
 interface ICacheData {
   resetTS: number;

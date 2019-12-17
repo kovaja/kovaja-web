@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../env.local';
-import { Logger } from '../utilities/logger';
+import { Logger } from '../utils/logger';
 
 export class AdminController {
   public createConfiguration(): Promise<void> {

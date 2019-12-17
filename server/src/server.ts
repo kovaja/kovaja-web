@@ -1,4 +1,4 @@
-import { Logger } from './utilities/logger';
+import { Logger } from './utils/logger';
 import { createApp } from './app';
 import { Application } from 'express';
 

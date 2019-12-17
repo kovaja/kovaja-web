@@ -2,9 +2,9 @@ import { Response } from 'express';
 import { Headers } from 'request';
 import { IArticle } from '../../../shared/api.schemas';
 import { Configuration, IConfiguration } from '../database/configuration.schema';
-import { promiseTap } from '../utilities/commons';
-import { HttpUtility } from '../utilities/http.utility';
-import { Logger } from '../utilities/logger';
+import { promiseTap } from '../utils/commons';
+import { HttpUtility } from '../utils/http.utility';
+import { Logger } from '../utils/logger';
 
 interface IRequestToken {
   code: string;

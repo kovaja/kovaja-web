@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { AdminController } from '../controllers/admin.controller';
-import { ApiUtility } from '../utilities/api.utility';
+import { ApiUtility } from '../utils/api.utility';
 
 export class AdminRoute {
   private controller: AdminController;
