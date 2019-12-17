@@ -5,6 +5,8 @@ import { Configuration, IConfiguration } from '../database/configuration.schema'
 import { promiseTap } from '../utils/commons';
 import { Http } from '../utils/http';
 import { Logger } from '../utils/logger';
+import { Constants } from '../constants/constants';
+import { Images } from '../constants/images';
 
 interface IRequestToken {
   code: string;
@@ -188,7 +190,7 @@ export class PocketController {
       return {
         resolved_title: data.resolved_title,
         excerpt: this.getShortenedExcerpt(data.excerpt),
-        image: data.image ? data.image.src : null,
+        image: data.image ? data.image.src : 'http://localhost:8000/' + Images.DEFAULT_ARTICLE,
         time_added: Number(data.time_added),
         resolved_url: data.resolved_url,
         shortened_url: this.getShortenedUrl(data.resolved_url)

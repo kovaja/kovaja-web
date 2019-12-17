@@ -6,8 +6,10 @@ import { GithubRoute } from './github.route';
 import { PocketRoute } from './pocket.route';
 import { AdminRoute } from './admin.route';
 
+const staticPath = path.resolve(__dirname, '../', AppConfig.CLIENT_BUILD_PATH);
+
 function serveIndex(req: express.Request, res: express.Response): void {
-  const indexPath = path.join(__dirname, AppConfig.CLIENT_BUILD_PATH, 'index.html');
+  const indexPath = path.join(staticPath, 'index.html');
 
   res.sendFile(indexPath);
 }
@@ -25,7 +27,6 @@ export function initRoutes(app: express.Application): void {
 }
 
 export function initStaticRoutes(app: express.Application): void {
-  const staticPath = path.join(__dirname, AppConfig.CLIENT_BUILD_PATH);
   app.use(express.static(staticPath));
   app.get('/*', serveIndex);
 }
