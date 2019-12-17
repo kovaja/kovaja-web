@@ -2,24 +2,42 @@ import * as request from 'request';
 import { Logger } from './logger';
 import { AppError } from '../models/AppError';
 
-export class HttpUtility {
+export class Http {
+  public static readonly jsonHeaders: request.Headers = {
+    'Content-Type': 'application/json; charset=UTF-8',
+  };
+
   private static isFailResponse(res: request.Response): boolean {
     return res.statusCode < 200 || res.statusCode > 299;
   }
 
   private static getErrorMessage(url: string, res: request.Response): string {
-    const message = `Failed to get ${url}: ${res.statusMessage} (${res.statusCode})`;
+    const message = `Failed request: ${url}: ${res.statusMessage} (${res.statusCode})`;
     let details = '';
 
     try {
       details =
-        + '\n'
-        + JSON.stringify(res.headers)
-        + '\n'
-        + JSON.stringify(res.body);
+        + '\n\n'
+        + JSON.stringify(res.headers, null, 2)
+        + '\n\n'
+        + JSON.stringify(res.body, null, 2);
     } catch { }
 
     return message + details;
+  }
+
+  private static getResponseHandler(url, resolve, reject): (error: any, res: request.Response) => void {
+    return (error: any, res: request.Response): void => {
+      if (error) {
+        return reject(error);
+      }
+
+      if (Http.isFailResponse(res)) {
+        return reject(Http.getErrorMessage(url, res));
+      }
+
+      resolve(res);
+    };
   }
 
   public static readJsonBody(data: string): any {
@@ -44,41 +62,19 @@ export class HttpUtility {
 
   public static get(url: string, headers?: request.Headers): Promise<request.Response> {
     const promiseExecutor = (resolve, reject): void => {
-
-      const requestCallback = (error: any, res: request.Response): void => {
-        if (error) {
-          return reject(error);
-        }
-
-        resolve(res);
-      };
-
       const options: request.OptionsWithUrl = {
         url: url,
         headers: headers || {}
       };
 
-      request(options, requestCallback);
+      request(options, Http.getResponseHandler(url, resolve, reject));
     };
 
     return new Promise(promiseExecutor);
   }
 
-  public static post(url: string, body: any,  headers?: request.Headers): Promise<request.Response> {
+  public static post(url: string, body: any, headers?: request.Headers): Promise<request.Response> {
     const promiseExecutor = (resolve, reject): void => {
-
-      const requestCallback = (error: any, res: request.Response): void => {
-        if (error) {
-          return reject(error);
-        }
-
-        if (HttpUtility.isFailResponse(res)) {
-          return reject(HttpUtility.readBodyFromResponse(res));
-        }
-
-        resolve(res);
-      };
-
       const content = JSON.stringify(body);
 
       const options: request.OptionsWithUrl = {
@@ -88,7 +84,7 @@ export class HttpUtility {
         url: url
       };
 
-      request.post(options, requestCallback);
+      request.post(options, Http.getResponseHandler(url, resolve, reject));
     };
 
     return new Promise(promiseExecutor);

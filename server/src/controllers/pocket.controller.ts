@@ -3,7 +3,7 @@ import { Headers } from 'request';
 import { IArticle } from '../../../shared/api.schemas';
 import { Configuration, IConfiguration } from '../database/configuration.schema';
 import { promiseTap } from '../utils/commons';
-import { HttpUtility } from '../utils/http.utility';
+import { Http } from '../utils/http';
 import { Logger } from '../utils/logger';
 
 interface IRequestToken {
@@ -77,7 +77,7 @@ export class PocketController {
     };
 
     const headers: Headers = {
-      'Content-Type': 'application/json; charset=UTF-8',
+      ...Http.jsonHeaders,
       'X-Accept': 'application/json'
     };
 
@@ -86,9 +86,9 @@ export class PocketController {
       code: requestToken
     };
 
-    return HttpUtility.post(url, body, headers)
-      .then(HttpUtility.readBodyFromResponse)
-      .then(HttpUtility.readJsonBody)
+    return Http.post(url, body, headers)
+      .then(Http.readBodyFromResponse)
+      .then(Http.readJsonBody)
       .then(promiseTap(storeToken))
       .then((data: IAccessToken) => {
         Logger.log('Pocket authorised with ' + data.access_token);
@@ -100,7 +100,7 @@ export class PocketController {
     const url = this.oauthApi + '/request';
 
     const headers: Headers = {
-      'Content-Type': 'application/json; charset=UTF-8',
+      ...Http.jsonHeaders,
       'X-Accept': 'application/json'
     };
 
@@ -109,9 +109,9 @@ export class PocketController {
       redirect_uri: POCKET_REDIRECT_URL
     };
 
-    return HttpUtility.post(url, body, headers)
-      .then(HttpUtility.readBodyFromResponse)
-      .then(HttpUtility.readJsonBody);
+    return Http.post(url, body, headers)
+      .then(Http.readBodyFromResponse)
+      .then(Http.readJsonBody);
   }
 
   public loginToPocket(res: Response): Promise<void> {
@@ -145,8 +145,7 @@ export class PocketController {
     const url = this.v3Api + '/get';
 
     const headers: Headers = {
-      'Content-Type': 'application/json; charset=UTF-8',
-      'X-Accept': 'application/json'
+      ...Http.jsonHeaders
     };
 
     const body: IArticlesBody = {
@@ -179,9 +178,9 @@ export class PocketController {
         .sort(byAddedTime);
     };
 
-    return HttpUtility.post(url, body, headers)
-      .then(HttpUtility.readBodyFromResponse)
-      .then(HttpUtility.readJsonBody)
+    return Http.post(url, body, headers)
+      .then(Http.readBodyFromResponse)
+      .then(Http.readJsonBody)
       .then(getListOfArticles)
       .then(buildResponse);
   }

@@ -1,5 +1,5 @@
 import { IUserData, IRepository } from '../../../shared/api.schemas';
-import { HttpUtility } from '../utils/http.utility';
+import { Http } from '../utils/http';
 import { Response, Headers } from 'request';
 import { Logger } from '../utils/logger';
 import { AppCache } from '../models/AppCache';
@@ -37,16 +37,16 @@ export class GithubController {
   private getGithubData(url: string): Promise<any> {
     if (this.cache.isValid(url)) {
       return Promise.resolve(this.cache.get<string>(url))
-        .then(HttpUtility.readJsonBody);
+        .then(Http.readJsonBody);
     }
 
-    return HttpUtility
+    return Http
       .get(url, { 'User-Agent': this.githubUser })
       .then(
         promiseTap((r: Response) => this.handleGithubLimit(url, r))
       )
-      .then(HttpUtility.readBodyFromResponse)
-      .then(HttpUtility.readJsonBody);
+      .then(Http.readBodyFromResponse)
+      .then(Http.readJsonBody);
   }
 
   public getUserData(): Promise<IUserData> {
