@@ -9,3 +9,9 @@ export function promiseTap<T>(sideEffect: (data: T) => void): (data: T) => T {
     return data;
   };
 }
+
+export function promiseMapTo<T>(value: T): (data: any) => T {
+  return function() {
+    return value;
+  };
+}

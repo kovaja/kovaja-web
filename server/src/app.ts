@@ -1,33 +1,17 @@
-import * as bodyParser from 'body-parser';
+
 import * as express from 'express';
-import * as path from 'path';
-import { AppConfig } from './app.config';
-import { Routes } from './routes/routes';
 
-class App {
-  public app: express.Application;
+import { initRoutes, initStaticRoutes } from './routes/routes';
+import { initalizeDatabase } from './database/database';
+import { Logger } from './utilities/logger';
+import { promiseMapTo } from './utilities/commons';
 
-  constructor() {
-    this.app = express();
+export function createApp(): Promise<express.Application> {
+  const app = express();
 
-    this.initialize();
-  }
-
-  private serveIndex(req: express.Request, res: express.Response): void {
-    const indexPath = path.join(__dirname, AppConfig.CLIENT_BUILD_PATH, 'index.html');
-
-    res.sendFile(indexPath);
-  }
-
-  private initialize(): void {
-    const staticPath = path.join(__dirname, AppConfig.CLIENT_BUILD_PATH);
-
-    this.app.use(bodyParser.json());
-    Routes.initRoutes(this.app);
-
-    this.app.use(express.static(staticPath));
-    this.app.get('/*', this.serveIndex.bind(this));
-  }
+  return initalizeDatabase()
+    .then(() => Logger.log('Database connected'))
+    .then(() => initRoutes(app))
+    .then(() => initStaticRoutes(app))
+    .then(promiseMapTo(app));
 }
-
-export default new App().app;
