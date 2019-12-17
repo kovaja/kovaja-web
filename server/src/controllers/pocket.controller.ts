@@ -1,11 +1,10 @@
 import { Response } from 'express';
 import { Headers } from 'request';
 import { IArticle } from '../../../shared/api.schemas';
-import { AppCache } from '../models/AppCache';
+import { Configuration, IConfiguration } from '../database/configuration.schema';
 import { promiseTap } from '../utilities/commons';
 import { HttpUtility } from '../utilities/http.utility';
 import { Logger } from '../utilities/logger';
-import { Constants } from '../constants/constants';
 
 interface IRequestToken {
   code: string;
@@ -48,9 +47,21 @@ export class PocketController {
     return this.v3Api + '/oauth';
   }
 
+  private pocketConsumerKey: string;
+  private pocketAccessKey: string;
+
   constructor() {
     this.baseUrl = 'https://getpocket.com';
     this.requestToken = null;
+
+    Configuration.read()
+      .then(this.setKeys.bind(this))
+      .then(() => Logger.log('Pocket keys were set'));
+  }
+
+  private setKeys(c: IConfiguration): void {
+    this.pocketAccessKey = c.pocketAccessKey;
+    this.pocketConsumerKey = c.pocketConsumerKey;
   }
 
   private getPocketLoginUrl(requestToken: string) {
@@ -62,7 +73,7 @@ export class PocketController {
     const url = this.oauthApi + '/authorize';
 
     const storeToken = (data: IAccessToken): void => {
-      // TODO: decide whether we want to store it in DB
+      // Note: here you will get your access token
     };
 
     const headers: Headers = {
@@ -71,7 +82,7 @@ export class PocketController {
     };
 
     const body: IAuthorizeBody = {
-      consumer_key: Constants.POCKET_CONSUMER_KEY,
+      consumer_key: this.pocketConsumerKey,
       code: requestToken
     };
 
@@ -94,7 +105,7 @@ export class PocketController {
     };
 
     const body: IRequestTokenBody = {
-      consumer_key: Constants.POCKET_CONSUMER_KEY,
+      consumer_key: this.pocketConsumerKey,
       redirect_uri: POCKET_REDIRECT_URL
     };
 
@@ -139,8 +150,8 @@ export class PocketController {
     };
 
     const body: IArticlesBody = {
-      consumer_key: Constants.POCKET_CONSUMER_KEY,
-      access_token: Constants.POCKET_ACCESS_KEY,
+      consumer_key: this.pocketConsumerKey,
+      access_token: this.pocketAccessKey,
       sort: 'oldest',
       detailType: 'complete'
     };
