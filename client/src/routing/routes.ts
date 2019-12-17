@@ -1,4 +1,4 @@
-import Favorites from "@/components/Favorites.vue";
+import Favorites from "@/components/favorites/Favorites.vue";
 import Home from "@/components/home/Home.vue";
 import Projects from "@/components/Projects.vue";
 import { RouteConfig } from "vue-router";

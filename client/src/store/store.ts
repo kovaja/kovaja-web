@@ -1,18 +1,21 @@
 import Api from "@/config/api";
 import axios from "axios";
 import { StoreOptions } from "vuex";
-import { IRepository, IUserData } from "../../../shared/api.schemas";
+import { IRepository, IUserData, IArticle } from "../../../shared/api.schemas";
 
 export interface IState {
   userDataLoading: boolean;
   repositoriesLoading: boolean;
+  articlesLoading: boolean;
   user: IUserData | null;
   repositories: IRepository[];
+  articles: IArticle[];
 }
 
 export enum Actions {
   GET_USER = "GET_USER",
-  GET_REPOSITORIES = "GET_REPOSITORIES"
+  GET_REPOSITORIES = "GET_REPOSITORIES",
+  GET_ARTICLES = "GET_ARTICLES"
 }
 
 interface ILoadingData {
@@ -34,8 +37,10 @@ export const storeOptions: StoreOptions<IState> = {
   state: {
     userDataLoading: false,
     repositoriesLoading: false,
+    articlesLoading: false,
     user: null,
-    repositories: []
+    repositories: [],
+    articles: []
   },
   getters: {},
   mutations: {
@@ -54,6 +59,9 @@ export const storeOptions: StoreOptions<IState> = {
     },
     setRepositories: (state: IState, repos: IRepository[]) => {
       state.repositories = repos;
+    },
+    setArticles: (state: IState, articles: IArticle[]) => {
+      state.articles = articles;
     }
   },
   actions: {
@@ -79,6 +87,18 @@ export const storeOptions: StoreOptions<IState> = {
       axios.get(url).then(res => {
         commit("setLoading", loadingFactory("repositories", false));
         commit("setRepositories", res.data);
+      });
+    },
+    [Actions.GET_ARTICLES]: ({ commit }) => {
+      commit("setLoading", loadingFactory("articles", true));
+
+      const url = Api()
+        .pocket()
+        .articles();
+
+      axios.get(url).then(res => {
+        commit("setLoading", loadingFactory("articles", false));
+        commit("setArticles", res.data);
       });
     }
   }

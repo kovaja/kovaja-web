@@ -46,7 +46,7 @@ import TimeSince from "@/components/common/TimeSince.vue";
 import RepoCarusel from "@/components/home/github-overview/RepoCarusel.vue";
 import ContentCard from "@/components/common/ContentCard.vue";
 import { IUserData, IRepository } from "../../../../../shared/api.schemas";
-import { Actions, IState } from "@/store/store";
+import { Actions } from "@/store/store";
 import { mapState } from "vuex";
 
 export default Vue.extend({
@@ -56,7 +56,6 @@ export default Vue.extend({
     RepoCarusel,
     ContentCard
   },
-  props: {},
   computed: {
     ...mapState({ user: "user" }),
     hasUser: function(): boolean {

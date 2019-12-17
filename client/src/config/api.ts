@@ -1,7 +1,8 @@
 export default function() {
+  const baseUrl = "/api";
   return {
     github: function() {
-      let url = "/api/github";
+      const url = `${baseUrl}/github`;
 
       return {
         user: function(): string {
@@ -9,6 +10,15 @@ export default function() {
         },
         repos: function(): string {
           return `${url}/repos`;
+        }
+      };
+    },
+    pocket: function() {
+      const url = `${baseUrl}/pocket`;
+
+      return {
+        articles: function(): string {
+          return `${url}/articles`;
         }
       };
     }
