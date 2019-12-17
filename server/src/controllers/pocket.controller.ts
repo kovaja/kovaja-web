@@ -164,7 +164,8 @@ export class PocketController {
         resolved_title: data.resolved_title,
         excerpt: data.excerpt,
         image: data.image ? data.image.src : null,
-        time_added: Number(data.time_added)
+        time_added: Number(data.time_added),
+        resolved_url: data.resolved_url
       };
     };
 

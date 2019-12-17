@@ -1,8 +1,15 @@
 <template>
   <ul>
     <li v-for="(article, index) of articles" :key="'article' + index">
-      <img :src="article.image" alt="Article image" height="100px" width="100px" />
-      <h3>{{ article.resolved_title }}</h3>
+      <img
+        :src="article.image"
+        alt="Article image"
+        height="100px"
+        width="100px"
+      />
+      <a :href="article.resolved_url" target="_blank">{{
+        article.resolved_title
+      }}</a>
       <p>{{ article.excerpt }}</p>
     </li>
   </ul>
