@@ -7,16 +7,26 @@ export function logIndexAccess(request: Request): void {
     const isIndexRequest = request.accepts().includes('text/html');
 
     if (isIndexRequest === false) {
+      Logger.log('[ACCESS LOG]', 'no index request', request.accepts());
       return;
     }
 
+    const remoteAddress = request.connection.remoteAddress;
+    let forwarded = request.headers['x-forwarded-for'];
+
+    if (Array.isArray(forwarded)) {
+      forwarded = forwarded.join(' | ');
+    }
+
     const time = new Date().toISOString();
-    const url = request.headers.referer;
+    const host = request.hostname;
+    const url = request.url;
     const userAgent = request.headers['user-agent'];
-    const ip = request.ip;
+    const ip = forwarded || remoteAddress;
 
     const log: IAccessLog = {
       time,
+      host,
       ip,
       url,
       userAgent

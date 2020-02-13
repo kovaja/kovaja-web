@@ -2,6 +2,7 @@ import { Document, model, Model, Schema } from 'mongoose';
 
 export interface IAccessLog {
   time: string;
+  host: string;
   url: string;
   userAgent: string;
   ip: string;
@@ -11,6 +12,7 @@ interface IAccessLogModel extends IAccessLog, Document { }
 
 const AccessLogSchema: Schema = new Schema({
   time: String,
+  host: String,
   url: String,
   userAgent: String,
   ip: String
