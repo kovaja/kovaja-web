@@ -57,6 +57,7 @@
     "prefer-const": true,
     "jsdoc-format": true,
     "object-literal-sort-keys": false,
-    "no-console": true
+    "no-console": true,
+    "no-conditional-assignment": true
   }
 }
