@@ -12,10 +12,10 @@ export class AdminRoute {
 
     router.use('/admin', subRouter);
 
-    subRouter.get('/createConfig', this.handleUser.bind(this));
+    subRouter.get('/createConfig', this.handleCreateConfig.bind(this));
   }
 
-  private handleUser(req: Request, res: Response): void {
+  private handleCreateConfig(req: Request, res: Response): void {
     this.controller.createConfiguration()
       .then(Api.handleResponse(res))
       .catch(Api.handleError(res));

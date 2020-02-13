@@ -1,15 +1,15 @@
 {
-  "name": "kovaja-ts-node-template",
+  "name": "kovaja-web",
   "version": "0.0.1",
-  "description": "Empty project with template for node.js application with REST api and react frontend",
+  "description": "Personal site project",
   "scripts": {
     "validate": "node ./tools/validation.js",
     "postinstall": "npm run client:install && npm run server:install",
-    "client:install": "cd client && npm install && npm run build",
-    "server:install": "cd server && npm install && npm run build",
+    "client:install": "cd client && npm install --only=dev && npm install && npm run build",
+    "server:install": "cd server && npm install --only=dev && npm install && npm run build",
     "server": "cd server && npm run prod",
     "start": "npm run server",
-
+    "publish": "git push heroku +master && heroku logs --tail -a kovaja-web",
     "server:dev": "cd server && npm run dev",
     "client:dev": "cd client && npm run dev"
   },

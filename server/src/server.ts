@@ -13,4 +13,5 @@ function onAppCreated(app: Application): void {
 }
 
 createApp()
-  .then(onAppCreated);
+  .then(onAppCreated)
+  .catch((e) => Logger.error(e));
