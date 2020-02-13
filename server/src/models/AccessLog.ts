@@ -6,6 +6,9 @@ export function logIndexAccess(request: Request): void {
   try {
     const isIndexRequest = request.accepts().includes('text/html');
 
+    // TODO: use some 3rd party to recognize device properly
+    // TODO: consider using xhr from client once index is served
+
     if (isIndexRequest === false) {
       Logger.log('[ACCESS LOG]', 'no index request', request.accepts());
       return;

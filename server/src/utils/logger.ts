@@ -5,6 +5,8 @@ enum LogLevel {
   error = 'error'
 }
 
+// TODO: introduce flags for log levels (env vars or db runtime config)
+
 export class Logger {
 
   private static out(level: LogLevel, ...args: any): void {

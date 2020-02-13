@@ -15,3 +15,5 @@ function onAppCreated(app: Application): void {
 createApp()
   .then(onAppCreated)
   .catch((e) => Logger.error(e));
+
+  // TODO: pre publish hook to increment version, then serve version to frontend
