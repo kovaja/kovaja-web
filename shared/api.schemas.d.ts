@@ -36,3 +36,7 @@ export interface ISpotifyTrack {
   played_at: string;
   url: string;
 }
+
+export interface IClientConfig {
+  timestamp: string;
+}

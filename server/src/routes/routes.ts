@@ -2,17 +2,14 @@ import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as path from 'path';
 import { AppConfig } from '../app.config';
+import { AdminRoute } from './admin.route';
 import { GithubRoute } from './github.route';
 import { PocketRoute } from './pocket.route';
-import { AdminRoute } from './admin.route';
 import { SpotifyRoute } from './spotify.route';
-import { logIndexAccess } from '../models/AccessLog';
 
 const staticPath = path.resolve(__dirname, '../', AppConfig.CLIENT_BUILD_PATH);
 
 function serveIndex(req: express.Request, res: express.Response): void {
-  logIndexAccess(req);
-
   const indexPath = path.join(staticPath, 'index.html');
 
   res.sendFile(indexPath);
