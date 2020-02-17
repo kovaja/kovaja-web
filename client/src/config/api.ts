@@ -1,32 +1,41 @@
 export default function() {
   const baseUrl = "/api";
   return {
-    github: function() {
+    admin () {
+      const url = `${baseUrl}/admin`;
+
+      return {
+        init () {
+          return `${url}/init`
+        }
+      }
+    },
+    github() {
       const url = `${baseUrl}/github`;
 
       return {
-        user: function(): string {
+        user(): string {
           return `${url}/user`;
         },
-        repos: function(): string {
+        repos(): string {
           return `${url}/repos`;
         }
       };
     },
-    pocket: function() {
+    pocket() {
       const url = `${baseUrl}/pocket`;
 
       return {
-        articles: function(): string {
+        articles(): string {
           return `${url}/articles`;
         }
       };
     },
-    spotify: function() {
+    spotify() {
       const url = `${baseUrl}/spotify`;
 
       return {
-        played: function(): string {
+        played(): string {
           return `${url}/played`;
         }
       };
