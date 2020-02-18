@@ -5,7 +5,7 @@
         <div class="mt-2 px-2 pt-5 pb-1" style="border-bottom: 1px solid;">
           <h1>Hi, I'm Kuba</h1>
         </div>
-        <p class="p-2 title__bio">And this is my bio</p>
+        <p class="p-2 title__bio">And the code below is actually mine</p>
       </div>
     </div>
   </ContentCard>
@@ -26,7 +26,7 @@ export default Vue.extend({
 .title {
   height: 450px;
   /* TODO: replace image */
-  background-image: url("../assets/title-image.jpg");
+  background-image: url("../assets/title-image.png");
   background-size: cover;
   position: relative;
 }

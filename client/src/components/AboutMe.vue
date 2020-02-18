@@ -10,7 +10,7 @@
       </p>
 
       <p class="px-5 text-justify">
-        I like Node.js and I tend to experiment with that at home. From time
+        I like Node.js and I tend to experiment with it at home. From time
         to time I touch some other programming language. I like Typescript and I
         am not afraid to say it 🙂. And I don't really like CSS, but that's
         because I suck at it. This site might be my master piece (thanks
