@@ -1,25 +1,22 @@
 <template>
-  <div id="app" class="vh-100">
-    <div class="container-fluid d-flex flex-column h-100 p-0">
-      <Header class="flex-shrink-0" />
-      <main
-        class="container-fluid flex-grow-1 d-flex flex-column align-items-center"
-      >
-        <div class="flex-grow-1 d-flex">
-          <router-view></router-view>
-        </div>
-      </main>
-    </div>
+  <div id="app">
+    <main class="container-fluid p-0">
+      <app-title />
+      <about-me class="bg-light" />
+      <my-reads />
+    </main>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Header from "./components/Header.vue";
+import AppTitle from "./components/AppTitle.vue";
+import AboutMe from "./components/AboutMe.vue";
+import MyReads from "./components/MyReads.vue";
 
 export default Vue.extend({
   name: "app",
-  components: { Header }
+  components: { AppTitle, AboutMe, MyReads }
 });
 </script>
 

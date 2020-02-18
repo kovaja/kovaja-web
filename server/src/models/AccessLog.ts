@@ -22,6 +22,11 @@ export function logIndexAccess(request: Request): void {
     const userAgent = request.headers['user-agent'];
     const ip = forwarded || remoteAddress;
 
+    if (host.includes('localhost')) {
+      Logger.log('[ACCESS LOG]', 'Localhost access', 'skip');
+      return;
+    }
+
     const log: IAccessLog = {
       time,
       host,
