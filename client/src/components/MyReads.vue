@@ -9,48 +9,28 @@
 
       <div v-if="articles.length === 0" class="px-5 py-2">
         <p>
-          <i
-            >Either (and very unlikely) I have no articles to read or Pocket is
-            not responsing</i
-          >
-          😢
+          <i>
+            Either (and very unlikely) I have no articles to read or Pocket is not responsing
+          </i>😢
         </p>
       </div>
-      <div v-else class="px-5 pt-2 pb-5 d-flex flex-column position-relative">
-        <div
-          class="swipe-wrapper"
-          v-for="(article, index) of articles"
-          :key="'swipe-item' + index"
-          :class="{ active: index === activeIndex }"
-        >
-          <article-card :article="article" />
-        </div>
 
-        <a
-          class="swipe__button-move prev btn btn-secondary"
-          role="button"
-          href="#"
-          @click.prevent="moveItem(-1)"
-          >&lt;</a
-        >
-        <a
-          class="swipe__button-move next btn btn-secondary"
-          role="button"
-          href="#"
-          @click.prevent="moveItem(+1)"
-          >&gt;</a
-        >
-      </div>
+      <app-carousel v-else :data="articles" class="px-5 pt-2 pb-5">
+        <template v-slot:item="{ item }">
+          <article-card :article="item" />
+        </template>
+      </app-carousel>
     </div>
   </ContentCard>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import ContentCard from "@/components/common/ContentCard.vue";
 import { mapState } from 'vuex';
 import { Actions } from '../store/store';
 import ArticleCard from './ArticleCard.vue';
+import ContentCard from "./common/ContentCard.vue";
+import AppCarousel from './common/AppCarousel.vue';
 
 interface IComponentData {
   activeIndex: number;
@@ -60,6 +40,7 @@ export default Vue.extend({
   name: "MyReads",
   components: {
     ContentCard,
+    AppCarousel,
     ArticleCard
   },
   data(): IComponentData {
