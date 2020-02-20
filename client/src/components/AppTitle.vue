@@ -6,6 +6,7 @@
           <h1>Hi, I'm Kuba</h1>
         </div>
         <p class="p-2 title__bio">And the code below is actually mine</p>
+        <!-- TODO: fixuj obrazek at v tom nejsou typos :D -->
       </div>
     </div>
   </ContentCard>
@@ -32,7 +33,7 @@ export default Vue.extend({
 }
 
 .title__overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
   top: 0;
   left: 0;

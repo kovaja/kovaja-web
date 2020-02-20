@@ -18,7 +18,7 @@ function fixFile(filePath) {
 function run() {
   FILES.forEach(fixFile);
 
-  console.log('[PRE-PROD BUILD HOOK]', 'Files fixes successfully')
+  console.log('[PRE-PROD BUILD HOOK]', 'Files fixed successfully')
 }
 
 
