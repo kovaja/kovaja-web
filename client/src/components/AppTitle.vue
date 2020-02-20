@@ -25,7 +25,7 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 .title {
-  height: 450px;
+  height: 50vh;
   /* TODO: replace image */
   background-image: url("../assets/title-image.png");
   background-size: cover;
