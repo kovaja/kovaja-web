@@ -2,74 +2,42 @@
   <ContentCard class="justify-content-center">
     <div class="col-12 col-md-8">
       <h3 class="m-0 pt-5 pb-2 px-5">What I like to read</h3>
-      <p class="px-5">Do you know the Pocket app? I usually save interesting articles for later.</p>
+      <p class="px-5">
+        Do you know the Pocket app? I usually save interesting articles for
+        later.
+      </p>
 
       <div v-if="articles.length === 0" class="px-5 py-2">
         <p>
-          <i>Either (and very unlikely) I have no articles to read or Pocket is not
-          responsing</i> 😢
+          <i
+            >Either (and very unlikely) I have no articles to read or Pocket is
+            not responsing</i
+          >
+          😢
         </p>
       </div>
-      <div v-else class="px-5 py-2 d-flex flex-column position-relative">
+      <div v-else class="px-5 pt-2 pb-5 d-flex flex-column position-relative">
         <div
+          class="swipe-wrapper"
           v-for="(article, index) of articles"
-          :key="'article-item' + index"
-          class="row article__card shadow align-items-center"
-          :class="{ active: index === activeArticle }"
+          :key="'swipe-item' + index"
+          :class="{ active: index === activeIndex }"
         >
-          <div class="col-12 col-md-4 p-0 p-md-4 article__image-wrapper">
-            <img
-              :src="article.image"
-              class="d-block float-left mr-4 article__image"
-              alt="Article image"
-            />
-          </div>
-          <div class="col-12 col-md-8 p-4">
-            <h4>
-              {{ article.resolved_title }}
-              <a :href="article.resolved_url" target="_blank" class="d-inline"
-                >💻</a
-              >
-            </h4>
-
-            <p>
-              {{ article.excerpt }}
-            </p>
-          </div>
+          <article-card :article="article" />
         </div>
 
-        <div class="p-4 d-flex justify-content-center">
-          <template v-if="articles.length <= 15">
-            <div class="d-flex justify-content-between">
-              <span
-                v-for="(article, index) of articles"
-                :key="'article-indicator' + index"
-                class="article__indicator"
-                :class="{ active: index === activeArticle }"
-              ></span>
-            </div>
-          </template>
-          <template v-else>
-            <div class="articles-swipe-hint">
-              Swipe to browse articles
-              <!-- TODO, resolve how to handle too many carusel items -->
-            </div>
-          </template>
-        </div>
-
-        <!-- TODO: ugly ugly ugly -->
         <a
-          class="article__button-move prev btn btn-secondary"
+          class="swipe__button-move prev btn btn-secondary"
           role="button"
           href="#"
-          @click.prevent="moveArticle(-1)"
+          @click.prevent="moveItem(-1)"
           >&lt;</a
         >
         <a
-          class="article__button-move next btn btn-secondary"
+          class="swipe__button-move next btn btn-secondary"
           role="button"
           href="#"
-          @click.prevent="moveArticle(+1)"
+          @click.prevent="moveItem(+1)"
           >&gt;</a
         >
       </div>
@@ -82,19 +50,21 @@ import Vue from "vue";
 import ContentCard from "@/components/common/ContentCard.vue";
 import { mapState } from 'vuex';
 import { Actions } from '../store/store';
+import ArticleCard from './ArticleCard.vue';
 
 interface IComponentData {
-  activeArticle: number;
+  activeIndex: number;
 }
 
 export default Vue.extend({
   name: "MyReads",
   components: {
-    ContentCard
+    ContentCard,
+    ArticleCard
   },
   data(): IComponentData {
     return {
-      activeArticle: 2
+      activeIndex: 2
     }
   },
   computed: {
@@ -108,8 +78,8 @@ export default Vue.extend({
     this.$store.dispatch(Actions.GET_ARTICLES);
   },
   methods: {
-    moveArticle(diff: number) {
-      let newActive = this.activeArticle + diff;
+    moveItem(diff: number) {
+      let newActive = this.activeIndex + diff;
 
       if (newActive < 0) {
         newActive = this.articles.length - 1;
@@ -117,14 +87,14 @@ export default Vue.extend({
         newActive = 0;
       }
 
-      this.activeArticle = newActive;
+      this.activeIndex = newActive;
     }
   }
 });
 </script>
 
 <style lang="scss" scoped>
-.article__card {
+.swipe-wrapper {
   display: none;
 
   &.active {
@@ -133,27 +103,7 @@ export default Vue.extend({
   }
 }
 
-.article__image {
-  width: 100%;
-}
-
-.article__indicator {
-  border: 1px solid transparent;
-  border-radius: 5px;
-  height: 10px;
-  width: 10px;
-  background-color: rgba(0, 0, 0, 0.3);
-
-  &.active {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-}
-
-.articles-swipe-hint {
-  font-style: italic;
-}
-
-.article__button-move {
+.swipe__button-move {
   position: absolute;
   top: 30%;
 
