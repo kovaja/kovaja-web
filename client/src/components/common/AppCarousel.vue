@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column position-relative">
+  <div class="px-5 d-flex flex-column position-relative">
     <div
       class="swipe-wrapper"
       v-for="(item, index) of data"
@@ -72,14 +72,17 @@ export default Vue.extend({
 
 .swipe__button-move {
   position: absolute;
-  top: 30%;
+  top: calc(50% - 50px);
+  height: 100px;
+  display: flex;
+  align-items: center;
 
   &.prev {
-    left: 5px;
+    left: -10px;
   }
 
   &.next {
-    right: 5px;
+    right: -10px;
   }
 }
 </style>

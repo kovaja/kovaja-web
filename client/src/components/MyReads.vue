@@ -15,7 +15,7 @@
         </p>
       </div>
 
-      <app-carousel v-else :data="articles" class="px-5 pt-2 pb-5">
+      <app-carousel v-else :data="articles" class="pt-2 pb-5">
         <template v-slot:item="{ item }">
           <article-card :article="item" />
         </template>
@@ -73,27 +73,3 @@ export default Vue.extend({
   }
 });
 </script>
-
-<style lang="scss" scoped>
-.swipe-wrapper {
-  display: none;
-
-  &.active {
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
-
-.swipe__button-move {
-  position: absolute;
-  top: 30%;
-
-  &.prev {
-    left: 5px;
-  }
-
-  &.next {
-    right: 5px;
-  }
-}
-</style>
