@@ -5,6 +5,7 @@
       <about-me class="bg-light" />
       <my-reads />
     </main>
+    <app-icons />
   </div>
 </template>
 
@@ -13,10 +14,11 @@ import Vue from "vue";
 import AppTitle from "./components/AppTitle.vue";
 import AboutMe from "./components/AboutMe.vue";
 import MyReads from "./components/MyReads.vue";
+import AppIcons from "./components/common/AppIcons.vue";
 
 export default Vue.extend({
   name: "app",
-  components: { AppTitle, AboutMe, MyReads }
+  components: { AppTitle, AboutMe, MyReads, AppIcons }
 });
 </script>
 

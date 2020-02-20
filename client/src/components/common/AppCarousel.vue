@@ -10,24 +10,26 @@
     </div>
 
     <a
-      class="swipe__button-move prev btn btn-secondary"
+      class="swipe__button-move prev btn btn-light"
       role="button"
       href="#"
       @click.prevent="moveItem(-1)"
-      >&lt;</a
-    >
+      ><svg-icon name="chevron-left" stroke-width="7px"
+    /></a>
+
     <a
-      class="swipe__button-move next btn btn-secondary"
+      class="swipe__button-move next btn btn-light"
       role="button"
       href="#"
       @click.prevent="moveItem(+1)"
-      >&gt;</a
-    >
+      ><svg-icon name="chevron-right" stroke-width="7px"
+    /></a>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import SvgIcon from "./SvgIcon.vue";
 
 interface IComponentData {
   activeIndex: number;
@@ -35,6 +37,9 @@ interface IComponentData {
 
 export default Vue.extend({
   name: "AppCarousel",
+  components: {
+    SvgIcon
+  },
   props: {
     data: Array
   },
@@ -72,7 +77,7 @@ export default Vue.extend({
 
 .swipe__button-move {
   position: absolute;
-  top: calc(50% - 50px);
+  top: calc(40% - 50px);
   height: 100px;
   display: flex;
   align-items: center;
