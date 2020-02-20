@@ -4,12 +4,12 @@ import { Application } from 'express';
 
 const PORT = process.env.PORT || 8000;
 
-function onAppListnening(): void {
+function onAppListening(): void {
   Logger.log('Server listening on port', PORT);
 }
 
 function onAppCreated(app: Application): void {
-  app.listen(PORT, onAppListnening);
+  app.listen(PORT, onAppListening);
 }
 
 createApp()
