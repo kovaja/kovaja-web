@@ -6,6 +6,7 @@ import { Configuration, IConfiguration } from '../database/configuration.schema'
 import { promiseTap } from '../utils/commons';
 import { Http } from '../utils/http';
 import { Logger } from '../utils/logger';
+import { getHost, getServerUrl } from '../utils/network';
 
 interface IRequestToken {
   code: string;
@@ -33,8 +34,7 @@ interface IAuthorizeBody {
   code: string;
 }
 
-// TODO: remove localhost, use actual hostname (protocol, host + http) or s ?
-const POCKET_REDIRECT_URL = 'http://localhost:8000/api/pocket/redirect';
+const POCKET_REDIRECT_URL = getServerUrl('api/pocket/redirect');
 
 export class PocketController {
   private baseUrl: string;
@@ -189,7 +189,7 @@ export class PocketController {
       return {
         resolved_title: data.resolved_title,
         excerpt: this.getShortenedExcerpt(data.excerpt),
-        image: data.image ? data.image.src : 'http://localhost:8000/' + Images.DEFAULT_ARTICLE,
+        image: data.image ? data.image.src : getServerUrl(Images.DEFAULT_ARTICLE),
         time_added: Number(data.time_added),
         resolved_url: data.resolved_url,
         shortened_url: this.getShortenedUrl(data.resolved_url)
@@ -212,5 +212,4 @@ export class PocketController {
       .then(getListOfArticles)
       .then(buildResponse);
   }
-
 }

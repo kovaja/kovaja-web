@@ -6,6 +6,7 @@ import { Logger } from '../utils/logger';
 import { Headers } from 'request';
 import { ISpotifyTrack } from '../../../shared/api.schemas';
 import { Images } from '../constants/images';
+import { getServerUrl } from '../utils/network';
 
 interface ITokenBody {
   grant_type: 'authorization_code';
@@ -28,8 +29,7 @@ const RECENTLY_PLAYED_SCOPE = 'user-read-recently-played';
 const ACCESS_TOKEN_CACHE_KEY = 'spotify-access-token';
 const REFRESH_TOKEN_CACHE_KEY = 'spotify-refresh-token';
 
-// TODO: remove localhost, use actual hostname
-const SPOTIFY_REDIRECT_URL = 'http://localhost:8000/api/spotify/redirect';
+const SPOTIFY_REDIRECT_URL = getServerUrl('api/spotify/redirect');
 
 export class SpotifyController {
   private cache: AppCache;

@@ -1,5 +1,4 @@
 import { Request, Response, Router } from 'express';
-import { AdminController } from '../controllers/admin.controller';
 import { SpotifyController } from '../controllers/spotify.controller';
 import { Api } from '../utils/api';
 
