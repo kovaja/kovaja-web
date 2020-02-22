@@ -1,12 +1,11 @@
 import { Response } from 'express';
 import { Headers } from 'request';
 import { IArticle } from '../../../shared/api.schemas';
+import { Images } from '../constants/images';
 import { Configuration, IConfiguration } from '../database/configuration.schema';
 import { promiseTap } from '../utils/commons';
 import { Http } from '../utils/http';
 import { Logger } from '../utils/logger';
-import { Constants } from '../constants/constants';
-import { Images } from '../constants/images';
 
 interface IRequestToken {
   code: string;
@@ -34,7 +33,7 @@ interface IAuthorizeBody {
   code: string;
 }
 
-// TODO: remove localhost, use actual hostname
+// TODO: remove localhost, use actual hostname (protocol, host + http) or s ?
 const POCKET_REDIRECT_URL = 'http://localhost:8000/api/pocket/redirect';
 
 export class PocketController {

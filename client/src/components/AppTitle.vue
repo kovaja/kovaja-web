@@ -6,7 +6,6 @@
           <h1>Hi, I'm Kuba</h1>
         </div>
         <p class="p-2 title__bio">And the code below is actually mine</p>
-        <!-- TODO: fixuj obrazek at v tom nejsou typos :D -->
       </div>
     </div>
   </ContentCard>
@@ -26,7 +25,6 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .title {
   height: 50vh;
-  /* TODO: replace image */
   background-image: url("../assets/title-image.png");
   background-size: cover;
   position: relative;

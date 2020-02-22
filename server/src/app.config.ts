@@ -1,4 +1,4 @@
-// TODO: introduce better solution
+// TODO: introduce better solution, it probably doesnt work on local
 
 let prefix = '../../';
 

@@ -16,6 +16,13 @@ import AboutMe from "./components/AboutMe.vue";
 import MyReads from "./components/MyReads.vue";
 import AppIcons from "./components/common/AppIcons.vue";
 
+// TODO: doresit texty (title, subtitle, intro)
+// TODO: doresit articles title + text + icona pocket
+// TODO: dodelat list se spotify
+// TODO: dodelat list s githubem
+// TODO: ikony twitter, github, likendin
+
+
 export default Vue.extend({
   name: "app",
   components: { AppTitle, AboutMe, MyReads, AppIcons }

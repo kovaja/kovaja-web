@@ -4,11 +4,6 @@ import { AccessLog, IAccessLog } from '../database/access-log.schema';
 
 export function logIndexAccess(request: Request): void {
   try {
-    // TODO: register accepts header const isIndexRequest = request.accepts().includes('appli/html');
-
-    // TODO: use some 3rd party to recognize device properly
-    // TODO: consider using xhr from client once index is served
-
     const remoteAddress = request.connection.remoteAddress;
     let forwarded = request.headers['x-forwarded-for'];
 
