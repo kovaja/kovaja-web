@@ -1,6 +1,6 @@
 {
   "name": "kovaja-web",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Personal site project",
   "scripts": {
     "validate": "node ./tools/validation.js",
