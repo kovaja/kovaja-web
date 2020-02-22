@@ -1,11 +1,9 @@
+import { isProduction } from './commons';
+
 const HOSTS = {
   local: 'localhost',
   heroku: 'kovaja-web.herokuapp.com'
 };
-
-function isProduction(): boolean {
-  return process.env.NODE_ENV === 'production';
-}
 
 export function getPort(): string {
   return process.env.PORT || '8000';
