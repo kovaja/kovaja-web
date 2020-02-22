@@ -1,4 +1,5 @@
 import * as bodyParser from 'body-parser';
+import { ServeStaticOptions } from 'serve-static';
 import * as express from 'express';
 import * as path from 'path';
 import { AppConfig } from '../app.config';
@@ -29,6 +30,11 @@ export function initRoutes(app: express.Application): void {
 }
 
 export function initStaticRoutes(app: express.Application): void {
-  app.use(express.static(staticPath));
+  const staticOptions: ServeStaticOptions = {
+    cacheControl: true,
+    maxAge: '1y'
+  };
+
+  app.use(express.static(staticPath, staticOptions));
   app.get('/*', serveIndex);
 }

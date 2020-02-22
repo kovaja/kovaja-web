@@ -23,5 +23,3 @@ function onAppCreated(app: Application): void {
 createApp()
   .then(onAppCreated)
   .catch((e) => Logger.error(e));
-
-  // TODO: hash and cache pro javascript + css bundles
