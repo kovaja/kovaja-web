@@ -161,7 +161,11 @@ export class SpotifyController {
       };
     };
 
-    // TODO: handle rate limiting
+    // Note: rate limiting. Spotify will return 429
+    // With retry-after header
+    // https://developer.spotify.com/documentation/web-api/
+    // But I wasn't able to reproduce. So for now, no rate limiting
+    // Will solve it once it happens
     return logToSpotify
       .then(() => Http.get(url, headers))
       .then(Http.readBodyFromResponse)
