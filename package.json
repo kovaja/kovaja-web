@@ -9,7 +9,10 @@
     "server:install": "cd server && npm install --only=dev && npm install && npm run build",
     "server": "cd server && npm run prod",
     "start": "npm run server",
-    "publish": "git push heroku +master && heroku logs --tail -a kovaja-web",
+    "publish": "git push origin master && git push heroku +master && heroku logs --tail -a kovaja-web",
+    "publish:patch": "npm version patch && npm run publish ",
+    "publish:minor": "npm version minor && npm run publish",
+    "publish:major": "npm version major && npm run publish",
     "server:dev": "cd server && npm run dev",
     "client:dev": "cd client && npm run dev"
   },
