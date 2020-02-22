@@ -1,6 +1,6 @@
 {
   "name": "kovaja-web",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Personal site project",
   "scripts": {
     "validate": "node ./tools/validation.js",
@@ -13,7 +13,10 @@
     "server:dev": "cd server && npm run dev",
     "client:dev": "cd client && npm run dev"
   },
-  "keywords": ["node", "typescript"],
+  "keywords": [
+    "node",
+    "typescript"
+  ],
   "author": "kovaja",
   "license": "ISC"
 }
