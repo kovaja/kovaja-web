@@ -2,7 +2,7 @@
   <svg
     :height="size"
     :width="size"
-    fill="transparent"
+    :fill="fill"
     :stroke="color"
     :stroke-width="stokeWidth"
   >
@@ -29,10 +29,20 @@ export default Vue.extend({
       type: String,
       required: false,
       default: '3px'
+    },
+    medium: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    filled: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   computed: {
-    color() {
+    color(): string {
       if (this.bright) {
         return '#ffffff'
       }
@@ -40,9 +50,20 @@ export default Vue.extend({
       // default dark
       return '#000000'
     },
-    size() {
+    size(): number {
+      if (this.medium) {
+        return 20;
+      }
+
       // default small
       return 10
+    },
+    fill(): string {
+      if (this.filled) {
+        return this.color;
+      }
+
+      return 'transparent';
     }
   }
 });

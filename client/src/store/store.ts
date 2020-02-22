@@ -5,10 +5,12 @@ import {
   IRepository,
   IUserData,
   IArticle,
-  ISpotifyTrack
+  ISpotifyTrack,
+  IClientConfig
 } from "../../../shared/api.schemas";
 
 export interface IState {
+  version: string;
   userDataLoading: boolean;
   repositoriesLoading: boolean;
   articlesLoading: boolean;
@@ -22,7 +24,8 @@ export enum Actions {
   GET_USER = "GET_USER",
   GET_REPOSITORIES = "GET_REPOSITORIES",
   GET_ARTICLES = "GET_ARTICLES",
-  GET_TRACKS = "GET_TRACKS"
+  GET_TRACKS = "GET_TRACKS",
+  SET_CLIENT_CONFIG = "SET_CLIENT_CONFIG"
 }
 
 interface ILoadingData {
@@ -42,6 +45,7 @@ function loadingFactory(
 
 export const storeOptions: StoreOptions<IState> = {
   state: {
+    version: 'x.x.x',
     userDataLoading: false,
     repositoriesLoading: false,
     articlesLoading: false,
@@ -73,9 +77,15 @@ export const storeOptions: StoreOptions<IState> = {
     },
     setTracks: (state: IState, tracks: ISpotifyTrack[]) => {
       state.tracks = tracks;
+    },
+    setVersion: (state: IState, version: string) => {
+      state.version = version;
     }
   },
   actions: {
+    [Actions.SET_CLIENT_CONFIG]: ({ commit }, payload: IClientConfig) => {
+      commit("setVersion", payload.version)
+    },
     [Actions.GET_USER]: ({ commit }) => {
       commit("setLoading", loadingFactory("user", true));
 

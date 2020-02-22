@@ -31,7 +31,7 @@ export default Vue.extend({
 }
 
 .title__overlay {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   top: 0;
   left: 0;

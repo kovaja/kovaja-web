@@ -1,6 +1,6 @@
 {
   "name": "kovaja-web-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "server.js",
   "scripts": {
     "prebuild": "node pre-prod-build.js",
