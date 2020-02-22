@@ -24,5 +24,4 @@ createApp()
   .then(onAppCreated)
   .catch((e) => Logger.error(e));
 
-  // TODO: pre publish hook to increment version, then serve version to frontend
   // TODO: hash and cache pro javascript + css bundles

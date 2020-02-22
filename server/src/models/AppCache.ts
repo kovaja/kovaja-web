@@ -12,7 +12,7 @@ export class AppCache {
     this.data = new Map();
   }
 
-  public set<T>(key: string, data: T, resetTS: number): void {
+  public set<T>(key: string, data: T, resetTS: number = 0): void {
     Logger.log('[CACHE]', 'set', key, resetTS);
 
     this.data.set(key, { data, resetTS });

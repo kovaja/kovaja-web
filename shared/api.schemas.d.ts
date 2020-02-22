@@ -39,4 +39,5 @@ export interface ISpotifyTrack {
 
 export interface IClientConfig {
   timestamp: string;
+  version: string;
 }
