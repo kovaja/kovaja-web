@@ -1,7 +1,7 @@
 <template>
   <ContentCard class="justify-content-center">
-    <div class="col-12 col-md-8">
-      <h3 class="m-0 pt-5 pb-2 px-5">What I like to read</h3>
+    <div class="col-12 col-md-8 py-5">
+      <h3 class="m-0 pb-2 px-5">What I like to read</h3>
       <p class="px-5">
         Do you know the Pocket app? I usually save interesting articles for
         later.
@@ -16,7 +16,7 @@
         </p>
       </div>
 
-      <app-carousel v-else :data="articles" class="pt-2 pb-5">
+      <app-carousel v-else :data="articles">
         <template v-slot:item="{ item }">
           <article-card :article="item" />
         </template>

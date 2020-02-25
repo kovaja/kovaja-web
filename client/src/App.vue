@@ -25,6 +25,7 @@ import AppFooter from "./components/AppFooter.vue";
 // TODO: dodelat list se spotify
 // TODO: dodelat list s githubem
 // TODO: initial loading indicator
+// TODO: launch chrome with spotify api login after build ?
 
 export default Vue.extend({
   name: "app",

@@ -1,7 +1,7 @@
 <template>
   <ContentCard class="justify-content-center">
-    <div class="col-12 col-md-8">
-      <h3 class="m-0 pt-5 pb-2 px-5">What am I listening to</h3>
+    <div class="col-12 col-md-8 py-5">
+      <h3 class="m-0 pb-2 px-5">What am I listening to</h3>
       <p class="px-5">
         There is no day without Spotify for me. Here is a list of the most
         recently played songs
@@ -45,7 +45,7 @@
                 </div>
               </div>
               <div class="px-2">
-                <svg-icon name="external" medium />
+                <svg-icon name="external" medium/>
               </div>
             </a>
           </li>
