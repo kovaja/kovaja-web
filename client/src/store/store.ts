@@ -14,6 +14,7 @@ export interface IState {
   userDataLoading: boolean;
   repositoriesLoading: boolean;
   articlesLoading: boolean;
+  tracksLoading: boolean;
   user: IUserData | null;
   repositories: IRepository[];
   articles: IArticle[];
@@ -49,6 +50,7 @@ export const storeOptions: StoreOptions<IState> = {
     userDataLoading: false,
     repositoriesLoading: false,
     articlesLoading: false,
+    tracksLoading: false,
     user: null,
     repositories: [],
     articles: [],
@@ -62,6 +64,12 @@ export const storeOptions: StoreOptions<IState> = {
           state.userDataLoading = data.loading;
           break;
         case "repositories":
+          state.repositoriesLoading = data.loading;
+          break;
+        case "articles":
+          state.repositoriesLoading = data.loading;
+          break;
+        case "tracks":
           state.repositoriesLoading = data.loading;
           break;
       }

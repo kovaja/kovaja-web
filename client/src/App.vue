@@ -4,6 +4,7 @@
       <app-title />
       <about-me class="bg-light" />
       <my-reads />
+      <my-music class="bg-light"  />
     </main>
     <app-footer />
     <app-icons />
@@ -15,6 +16,7 @@ import Vue from "vue";
 import AppTitle from "./components/AppTitle.vue";
 import AboutMe from "./components/AboutMe.vue";
 import MyReads from "./components/MyReads.vue";
+import MyMusic from "./components/MyMusic.vue";
 import AppIcons from "./components/common/AppIcons.vue";
 import AppFooter from "./components/AppFooter.vue";
 
@@ -22,11 +24,11 @@ import AppFooter from "./components/AppFooter.vue";
 // TODO: doresit articles title + text + icona pocket
 // TODO: dodelat list se spotify
 // TODO: dodelat list s githubem
-// TODO: initial loading
+// TODO: initial loading indicator
 
 export default Vue.extend({
   name: "app",
-  components: { AppTitle, AboutMe, MyReads, AppIcons, AppFooter }
+  components: { AppTitle, AboutMe, MyReads, MyMusic, AppIcons, AppFooter }
 });
 </script>
 

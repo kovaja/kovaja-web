@@ -35,6 +35,11 @@ export default Vue.extend({
       required: false,
       default: false
     },
+    large: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     filled: {
       type: Boolean,
       required: false,
@@ -51,6 +56,10 @@ export default Vue.extend({
       return '#000000'
     },
     size(): number {
+      if (this.large) {
+        return 30;
+      }
+
       if (this.medium) {
         return 20;
       }
