@@ -21,8 +21,7 @@ import AppIcons from "./components/common/AppIcons.vue";
 import AppFooter from "./components/AppFooter.vue";
 
 // TODO: doresit texty (title, subtitle, intro)
-// TODO: doresit articles title + text + icona pocket
-// TODO: dodelat list se spotify
+// TODO: doresit articles/spotify title + text + icona
 // TODO: dodelat list s githubem
 // TODO: initial loading indicator
 // TODO: launch chrome with spotify api login after build ?

@@ -14,7 +14,7 @@
     </div>
 
 
-    <div class="footer__version text-light">Version: {{ version }}</div>
+    <div class="footer__version text-muted">Version: {{ version }}</div>
   </footer>
 </template>
 
