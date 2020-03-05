@@ -60,9 +60,9 @@ export class PocketController {
       .then(() => Logger.log('Pocket keys were set'));
   }
 
-  private setKeys(c: IConfiguration): void {
-    this.pocketAccessKey = c.pocketAccessKey;
-    this.pocketConsumerKey = c.pocketConsumerKey;
+  private setKeys(configuration: IConfiguration): void {
+    this.pocketAccessKey = configuration.pocket.keys.access;
+    this.pocketConsumerKey = configuration.pocket.keys.consumer;
   }
 
   private getPocketLoginUrl(requestToken: string) {

@@ -36,6 +36,7 @@ export class SpotifyController {
 
   private spotifyClientId: string;
   private spotifyClientSecret: string;
+  private spotifyRefreshToken: string;
   private authorizeHash: string;
 
   private get accountsUrl(): string {
@@ -55,16 +56,17 @@ export class SpotifyController {
   }
 
   private setSpotifyKeys(configuration: IConfiguration): void {
-    this.spotifyClientId = configuration.spotifyClientId;
-    this.spotifyClientSecret = configuration.spotifyClientSecret;
+    this.spotifyClientId = configuration.spotify.keys.clientId;
+    this.spotifyClientSecret = configuration.spotify.keys.clientSecret;
+    this.spotifyRefreshToken = configuration.spotify.keys.refreshToken;
   }
 
-  private setSpotifyTokens(response: ITokenResponse): void {
-    const tenDays = 10 * 24 * 60 * 60 * 1000;
+  private setSpotifyTokens(response: ITokenResponse): Promise<void> {
     const validTime = new Date().getTime() + response.expires_in * 1000 - 2;
-
     this.cache.set(ACCESS_TOKEN_CACHE_KEY, response.access_token, validTime);
-    this.cache.set(REFRESH_TOKEN_CACHE_KEY, response.refresh_token, validTime + tenDays);
+
+    return Configuration.update({ 'spotify.keys.refreshToken': response.refresh_token })
+      .then(() => Logger.log('Spotify refresh token updated'));
   }
 
   private getSpotifyLoginUrl(authorizeHash: string): string {
@@ -125,17 +127,15 @@ export class SpotifyController {
 
   public getRecentlyPlayed(): Promise<ISpotifyTrack[]> {
     // we have to have refresh token
-    const refreshToken = this.cache.get(REFRESH_TOKEN_CACHE_KEY);
-
-    if (typeof refreshToken !== 'string') {
-      Logger.error('Cannot get podcasts, no refresh token');
+    if (typeof this.spotifyRefreshToken !== 'string') {
+      Logger.error('Cannot get recently played songs, no refresh token');
       return Promise.resolve([]);
     }
 
     let logToSpotify = Promise.resolve();
     if (this.cache.isValid(ACCESS_TOKEN_CACHE_KEY) === false) {
       Logger.log('Spotify: requesting new access token');
-      logToSpotify = this.getSpotifyTokens(refreshToken);
+      logToSpotify = this.getSpotifyTokens(this.spotifyRefreshToken);
     }
 
     const url = this.apiMeUrl + '/player/recently-played';

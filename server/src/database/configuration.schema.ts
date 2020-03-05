@@ -1,19 +1,37 @@
 import { Document, model, Model, Schema } from 'mongoose';
 
 export interface IConfiguration {
-  pocketConsumerKey: string;
-  pocketAccessKey: string;
-  spotifyClientId: string;
-  spotifyClientSecret: string;
+  pocket: {
+    keys: {
+      consumer: string;
+      access: string;
+    }
+  };
+  spotify: {
+    keys: {
+      clientId: string;
+      clientSecret: string;
+      refreshToken: string;
+    }
+  };
 }
 
 interface IConfigurationModel extends IConfiguration, Document { }
 
 const ConfigurationSchema: Schema = new Schema({
-  pocketConsumerKey: String,
-  pocketAccessKey: String,
-  spotifyClientId: String,
-  spotifyClientSecret: String
+  pocket: {
+    keys: {
+      consumer: String,
+      access: String
+    }
+  },
+  spotify: {
+    keys: {
+      clientId: String,
+      clientSecret: String,
+      refreshToken: String
+    }
+  }
 });
 
 const ConfigurationDB: Model<IConfigurationModel> = model<IConfigurationModel>('Configuration', ConfigurationSchema);
@@ -39,6 +57,16 @@ export class Configuration {
 
     const promiseExecutor = (resolve, reject): void => {
       ConfigurationDB.deleteMany(query, (err) => err ? reject(err) : resolve());
+    };
+
+    return new Promise(promiseExecutor);
+  }
+
+  public static update(updateQuery: {[path: string]: string}): Promise<void> {
+    const query = {};
+
+    const promiseExecutor = (resolve, reject): void => {
+      ConfigurationDB.updateOne(query, { $set: updateQuery }, (err) => err ? reject(err) : resolve());
     };
 
     return new Promise(promiseExecutor);
