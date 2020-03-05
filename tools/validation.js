@@ -2,14 +2,12 @@ const execSync = require('child_process').execSync;
 
 const clientPath = './client';
 const clientCommands = [
-  'npm run lint',
-  'npm run build'
+  'npm run lint'
 ];
 
 const serverPath = './server';
 const serverCommands = [
-  'npm run lint',
-  'npm run build'
+  'npm run lint'
 ];
 
 function run(cmd) {
