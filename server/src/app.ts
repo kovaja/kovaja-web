@@ -13,5 +13,6 @@ export function createApp(): Promise<express.Application> {
     .then(() => Logger.log('Database connected'))
     .then(() => initRoutes(app))
     .then(() => initStaticRoutes(app))
+    .then(() => Logger.log('Routes initialized'))
     .then(promiseMapTo(app));
 }

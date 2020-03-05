@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
+import { Headers } from 'request';
+import { ISpotifyTrack } from '../../../shared/api.schemas';
+import { Images } from '../constants/images';
 import { Configuration, IConfiguration } from '../database/configuration.schema';
 import { AppCache } from '../models/AppCache';
 import { Http } from '../utils/http';
 import { Logger } from '../utils/logger';
-import { Headers } from 'request';
-import { ISpotifyTrack } from '../../../shared/api.schemas';
-import { Images } from '../constants/images';
 import { getServerUrl } from '../utils/network';
 
 interface ITokenBody {
@@ -47,15 +47,9 @@ export class SpotifyController {
     return 'https://api.spotify.com/v1/me';
   }
 
-  constructor() {
+  constructor(configuration: IConfiguration) {
     this.cache = new AppCache();
 
-    Configuration.read()
-      .then(this.setSpotifyKeys.bind(this))
-      .then(() => Logger.log('Spotify keys were set'));
-  }
-
-  private setSpotifyKeys(configuration: IConfiguration): void {
     this.spotifyClientId = configuration.spotify.keys.clientId;
     this.spotifyClientSecret = configuration.spotify.keys.clientSecret;
     this.spotifyRefreshToken = configuration.spotify.keys.refreshToken;

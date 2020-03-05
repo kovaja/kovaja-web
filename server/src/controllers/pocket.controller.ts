@@ -2,11 +2,11 @@ import { Response } from 'express';
 import { Headers } from 'request';
 import { IArticle } from '../../../shared/api.schemas';
 import { Images } from '../constants/images';
-import { Configuration, IConfiguration } from '../database/configuration.schema';
+import { IConfiguration } from '../database/configuration.schema';
 import { promiseTap } from '../utils/commons';
 import { Http } from '../utils/http';
 import { Logger } from '../utils/logger';
-import { getHost, getServerUrl } from '../utils/network';
+import { getServerUrl } from '../utils/network';
 
 interface IRequestToken {
   code: string;
@@ -51,16 +51,10 @@ export class PocketController {
   private pocketConsumerKey: string;
   private pocketAccessKey: string;
 
-  constructor() {
+  constructor(configuration: IConfiguration) {
     this.baseUrl = 'https://getpocket.com';
     this.requestToken = null;
 
-    Configuration.read()
-      .then(this.setKeys.bind(this))
-      .then(() => Logger.log('Pocket keys were set'));
-  }
-
-  private setKeys(configuration: IConfiguration): void {
     this.pocketAccessKey = configuration.pocket.keys.access;
     this.pocketConsumerKey = configuration.pocket.keys.consumer;
   }

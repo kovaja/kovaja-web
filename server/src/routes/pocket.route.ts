@@ -1,12 +1,13 @@
 import { Request, Response, Router } from 'express';
 import { PocketController } from '../controllers/pocket.controller';
 import { Api } from '../utils/api';
+import { IConfiguration } from '../database/configuration.schema';
 
 export class PocketRoute {
   private controller: PocketController;
 
-  constructor(router: Router) {
-    this.controller = new PocketController();
+  constructor(router: Router, configuration: IConfiguration) {
+    this.controller = new PocketController(configuration);
 
     const subRouter = Router();
 

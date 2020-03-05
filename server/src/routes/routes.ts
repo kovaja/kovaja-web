@@ -7,6 +7,7 @@ import { AdminRoute } from './admin.route';
 import { GithubRoute } from './github.route';
 import { PocketRoute } from './pocket.route';
 import { SpotifyRoute } from './spotify.route';
+import { IConfiguration, Configuration } from '../database/configuration.schema';
 
 const staticPath = path.resolve(__dirname, '../', AppConfig.CLIENT_BUILD_PATH);
 
@@ -16,15 +17,17 @@ function serveIndex(req: express.Request, res: express.Response): void {
   res.sendFile(indexPath);
 }
 
-export function initRoutes(app: express.Application): void {
+export async function initRoutes(app: express.Application): Promise<void> {
   app.use(bodyParser.json());
 
   const router = express.Router();
 
+  const configuration: IConfiguration = await Configuration.read();
+
   new GithubRoute(router);
-  new PocketRoute(router);
+  new PocketRoute(router, configuration);
   new AdminRoute(router);
-  new SpotifyRoute(router);
+  new SpotifyRoute(router, configuration);
 
   app.use('/api', router);
 }

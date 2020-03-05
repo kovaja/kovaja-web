@@ -1,12 +1,13 @@
 import { Request, Response, Router } from 'express';
 import { SpotifyController } from '../controllers/spotify.controller';
 import { Api } from '../utils/api';
+import { IConfiguration } from '../database/configuration.schema';
 
 export class SpotifyRoute {
   private controller: SpotifyController;
 
-  constructor(router: Router) {
-    this.controller = new SpotifyController();
+  constructor(router: Router, configuration: IConfiguration) {
+    this.controller = new SpotifyController(configuration);
 
     const subRouter = Router();
 
