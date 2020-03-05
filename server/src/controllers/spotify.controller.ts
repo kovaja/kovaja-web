@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Headers } from 'request';
+import { Headers, Response as RequestResponse } from 'request';
 import { ISpotifyTrack } from '../../../shared/api.schemas';
 import { Images } from '../constants/images';
 import { Configuration, IConfiguration } from '../database/configuration.schema';
@@ -7,6 +7,7 @@ import { AppCache } from '../models/AppCache';
 import { Http } from '../utils/http';
 import { Logger } from '../utils/logger';
 import { getServerUrl } from '../utils/network';
+import { encodeToBase64 } from '../utils/commons';
 
 interface ITokenBody {
   grant_type: 'authorization_code';
@@ -16,18 +17,22 @@ interface ITokenBody {
   client_secret: string;
 }
 
+interface IRefreshTokenBody {
+  grant_type: 'refresh_token';
+  refresh_token: string;
+}
+
 interface ITokenResponse {
   access_token: string;
   token_type: string;
   expires_in: number; // seconds
-  refresh_token: string;
+  refresh_token?: string;
   scope: string;
 }
 
 const FOLLOW_SCOPE = 'user-follow-read';
 const RECENTLY_PLAYED_SCOPE = 'user-read-recently-played';
 const ACCESS_TOKEN_CACHE_KEY = 'spotify-access-token';
-const REFRESH_TOKEN_CACHE_KEY = 'spotify-refresh-token';
 
 const SPOTIFY_REDIRECT_URL = getServerUrl('api/spotify/redirect');
 
@@ -47,6 +52,9 @@ export class SpotifyController {
     return 'https://api.spotify.com/v1/me';
   }
 
+  // TODO: this is not really handy
+  // it requires to restart server to refresh values from configuration
+  // ok for now
   constructor(configuration: IConfiguration) {
     this.cache = new AppCache();
 
@@ -58,6 +66,11 @@ export class SpotifyController {
   private setSpotifyTokens(response: ITokenResponse): Promise<void> {
     const validTime = new Date().getTime() + response.expires_in * 1000 - 2;
     this.cache.set(ACCESS_TOKEN_CACHE_KEY, response.access_token, validTime);
+
+    // When accessing new access token with refresh token there isn't new refresh token
+    if (typeof response.refresh_token !== 'string') {
+      return;
+    }
 
     return Configuration.update({ 'spotify.keys.refreshToken': response.refresh_token })
       .then(() => Logger.log('Spotify refresh token updated'));
@@ -75,18 +88,21 @@ export class SpotifyController {
       + `&state=${authorizeHash}`;
   }
 
-  private getSpotifyTokens(code: string): Promise<void> {
+  private refreshSpotifyToken(): Promise<void> {
     const url = `${this.accountsUrl}/api/token`;
 
-    const body: ITokenBody = {
-      grant_type: 'authorization_code',
-      code: code,
-      redirect_uri: SPOTIFY_REDIRECT_URL,
-      client_id: this.spotifyClientId,
-      client_secret: this.spotifyClientSecret
+    const body: IRefreshTokenBody = {
+      grant_type: 'refresh_token',
+      refresh_token: this.spotifyRefreshToken
     };
 
-    return Http.post(url, Http.urlEncodeObject(body), Http.formEncodedHeaders)
+    const secret = encodeToBase64(`${this.spotifyClientId}:${this.spotifyClientSecret}`);
+    const headers: Headers = {
+      ...Http.formEncodedHeaders,
+      'Authorization': `Basic ${secret}`
+    };
+
+    return Http.post(url, Http.urlEncodeObject(body), headers)
       .then(Http.readBodyFromResponse)
       .then(Http.readJsonBody)
       .then(d => this.setSpotifyTokens(d));
@@ -115,7 +131,20 @@ export class SpotifyController {
       return Promise.reject('Spotify authorization failed');
     }
 
-    return this.getSpotifyTokens(code)
+    const url = `${this.accountsUrl}/api/token`;
+
+    const body: ITokenBody = {
+      grant_type: 'authorization_code',
+      code: code,
+      redirect_uri: SPOTIFY_REDIRECT_URL,
+      client_id: this.spotifyClientId,
+      client_secret: this.spotifyClientSecret
+    };
+
+    return Http.post(url, Http.urlEncodeObject(body), Http.formEncodedHeaders)
+      .then(Http.readBodyFromResponse)
+      .then(Http.readJsonBody)
+      .then(d => this.setSpotifyTokens(d))
       .then(() => 'Spotify authenticated');
   }
 
@@ -127,14 +156,19 @@ export class SpotifyController {
     }
 
     let logToSpotify = Promise.resolve();
+
     if (this.cache.isValid(ACCESS_TOKEN_CACHE_KEY) === false) {
-      Logger.log('Spotify: requesting new access token');
-      logToSpotify = this.getSpotifyTokens(this.spotifyRefreshToken);
+      Logger.log('Requesting new Spotify access token');
+      logToSpotify = this.refreshSpotifyToken();
     }
 
-    const url = this.apiMeUrl + '/player/recently-played';
-    const headers: Headers = {
-      'Authorization': 'Bearer ' + this.cache.get(ACCESS_TOKEN_CACHE_KEY)
+    const getData = (): Promise<RequestResponse> => {
+      const url = this.apiMeUrl + '/player/recently-played';
+      const headers: Headers = {
+        'Authorization': 'Bearer ' + this.cache.get(ACCESS_TOKEN_CACHE_KEY)
+      };
+
+      return Http.get(url, headers);
     };
 
     const getAlbumImage = (album: any): string => {
@@ -161,7 +195,7 @@ export class SpotifyController {
     // But I wasn't able to reproduce. So for now, no rate limiting
     // Will solve it once it happens
     return logToSpotify
-      .then(() => Http.get(url, headers))
+      .then(() => getData())
       .then(Http.readBodyFromResponse)
       .then(Http.readJsonBody)
       .then(body => body.items.map(buildResponse));

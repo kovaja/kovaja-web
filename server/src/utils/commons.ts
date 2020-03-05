@@ -11,11 +11,15 @@ export function promiseTap<T>(sideEffect: (data: T) => void): (data: T) => T {
 }
 
 export function promiseMapTo<T>(value: T): (data: any) => T {
-  return function() {
+  return function () {
     return value;
   };
 }
 
 export function isProduction(): boolean {
   return process.env.NODE_ENV === 'production';
+}
+
+export function encodeToBase64(value: string): string {
+  return Buffer.from(value).toString('base64');
 }
