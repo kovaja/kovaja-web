@@ -20,11 +20,9 @@ import MyMusic from "./components/MyMusic.vue";
 import AppIcons from "./components/common/AppIcons.vue";
 import AppFooter from "./components/AppFooter.vue";
 
-// TODO: doresit texty (title, subtitle, intro)
 // TODO: doresit articles/spotify title + text + icona
 // TODO: dodelat list s githubem
 // TODO: initial loading indicator
-// TODO: launch chrome with spotify api login after build ?
 
 export default Vue.extend({
   name: "app",

@@ -3,17 +3,15 @@
     <div class="col-12 col-md-8 py-5">
       <h3 class="m-0 pb-2 px-5">What am I listening to</h3>
       <p class="px-5">
-        There is no day without Spotify for me. Here is a list of the most
-        recently played songs
-        <!-- TODO is this good enough? -->
+        There is no day without Spotify for me. Here you can see my recently played songs.
       </p>
 
       <div v-if="tracks.length === 0" class="px-5 py-2">
         <p>
           <i>
             Either (and very unlikely) there is no music I have been listening
-            to or the Spotify is not responding </i
-          >😢
+            to or the Spotify is not responding
+          </i>😢
         </p>
       </div>
 
