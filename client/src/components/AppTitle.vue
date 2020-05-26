@@ -5,7 +5,7 @@
         <div class="mt-2 px-2 pt-5 pb-1" style="border-bottom: 1px solid;">
           <h1>Hi, I'm Kuba</h1>
         </div>
-        <p class="p-2 title__bio">And the code below is actually mine</p>
+        <p class="p-2 title__bio">And I am web developer</p>
       </div>
     </div>
   </ContentCard>

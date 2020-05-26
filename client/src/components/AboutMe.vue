@@ -5,8 +5,7 @@
         One would expect some well thought introduction, but none would actually
         read it. So simply: I live in Prague, but I grew up in Brno. My
         collegues and friends from Prague make fun of it and I am fine with
-        that. I write software, mostly javascript. I create frontend single page apps
-        for a living.
+        that. I write code for a living, mostly javascript.
       </p>
 
       <p class="text-justify">
@@ -19,13 +18,13 @@
 
       <p class="text-justify">
         I started this project during my sabatical to learn Vue. Yes it is a
-        single page app 🤷‍♂️. Then I stopped and moved to some other (home)
+        single page app 🤷‍♂️. Then I stopped and moved to some other personal
         project, because that's what I apparently do and then I came back,
         because I couldn't leave the domain untouched for 2 years!
       </p>
 
       <p class="text-justify">
-        So thanks for stopping by, I really do appreciate that 🙂.
+        So thanks for stopping by, I appreciate that 🙂.
       </p>
     </div>
   </ContentCard>
