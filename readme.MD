@@ -1,2 +1,2 @@
 # Kovaja WEB
-- Personal web page
+- Personal web page (www.kovaja.cz)

@@ -23,6 +23,7 @@ import AppFooter from "./components/AppFooter.vue";
 // TODO: doresit articles/spotify title + text + icona
 // TODO: dodelat list s githubem
 // TODO: initial loading indicator
+// TODO: use gramarlly to check texts
 
 export default Vue.extend({
   name: "app",
