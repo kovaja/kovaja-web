@@ -4,11 +4,11 @@ import { Constants } from '../constants/constants';
 import { promiseMapTo } from '../utils/commons';
 
 export function initalizeDatabase(): Promise<void> {
-  if (!Constants.DB_USERNAME || !Constants.DB_PWD || !Constants.DB_HOST || !Constants.DB_PORT) {
+  if (!Constants.DB_USERNAME || !Constants.DB_PWD || !Constants.DB_HOST || !Constants.DB_NAME) {
     Logger.error('Database init, uknown database credentials');
     return Promise.reject('Unknown DB credentials');
   }
-  const connectionURL = `mongodb://${Constants.DB_USERNAME}:${Constants.DB_PWD}@${Constants.DB_HOST}:${Constants.DB_PORT}/kovaja-web`;
+  const connectionURL = `mongodb+srv://${Constants.DB_USERNAME}:${Constants.DB_PWD}@${Constants.DB_HOST}/${Constants.DB_NAME}kovaja-web`;
   const options: mongoose.ConnectionOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true
