@@ -9,7 +9,7 @@
     "server:install": "cd server && npm install --only=dev && npm install && npm run build",
     "server": "cd server && npm run prod",
     "start": "npm run server",
-    "publish": "git push origin master && git push heroku +master && heroku logs --tail -a kovaja-web",
+    "publish": "git push origin master && npm install && gcloud app deploy",
     "publish:patch": "npm run validate && npm version patch && npm run publish",
     "publish:minor": "npm run validate && npm version minor && npm run publish",
     "publish:major": "npm run validate && npm version major && npm run publish",

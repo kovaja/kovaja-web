@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "prebuild": "node pre-prod-build.js",
     "build": "tsc",
     "dev": "nodemon",
     "prod": "node ./dist/src/server.js",
@@ -13,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "1.19.0",
+    "dotenv": "^8.2.0",
     "express": "4.17.1",
     "mongoose": "5.10.6",
     "request": "2.88.2"
