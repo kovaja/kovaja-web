@@ -8,7 +8,7 @@ export function initalizeDatabase(): Promise<void> {
     Logger.error('Database init, uknown database credentials');
     return Promise.reject('Unknown DB credentials');
   }
-  const connectionURL = `mongodb+srv://${Constants.DB_USERNAME}:${Constants.DB_PWD}@${Constants.DB_HOST}/${Constants.DB_NAME}kovaja-web`;
+  const connectionURL = `mongodb+srv://${Constants.DB_USERNAME}:${Constants.DB_PWD}@${Constants.DB_HOST}/${Constants.DB_NAME}?retryWrites=true&w=majority`;
   const options: mongoose.ConnectionOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true
