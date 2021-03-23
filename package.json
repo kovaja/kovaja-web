@@ -13,6 +13,7 @@
     "publish:patch": "npm run validate && npm version patch && npm run publish",
     "publish:minor": "npm run validate && npm version minor && npm run publish",
     "publish:major": "npm run validate && npm version major && npm run publish",
+    "logs": "gcloud app logs tail --project kovaja-web -s default",
     "server:dev": "cd server && npm run dev",
     "client:dev": "cd client && npm run dev"
   },
