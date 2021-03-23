@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon",
-    "prod": "node ./dist/src/server.js",
+    "prod": "node ./dist/server.js",
     "lint": "tslint -p tslint.json"
   },
   "author": "kovaja",
